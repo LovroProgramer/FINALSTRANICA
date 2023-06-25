@@ -1,0 +1,111 @@
+import socket
+from cryptography.hazmat.primitives.asymmetric import rsa
+from cryptography.hazmat.primitives import serialization
+from cryptography.hazmat.primitives import hashes
+from cryptography.hazmat.primitives.asymmetric import padding
+import os
+
+
+sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+sock.connect(('localhost', 6000))
+
+
+private_key = rsa.generate_private_key(
+    public_exponent=65537,
+    key_size=2048,
+)
+
+private_key_pem = private_key.private_bytes(
+    encoding=serialization.Encoding.PEM,
+    format=serialization.PrivateFormat.PKCS8,
+    encryption_algorithm=serialization.BestAvailableEncryption(b'1234')
+)
+
+public_key = private_key.public_key()
+
+public_key_pem = public_key.public_bytes(
+    encoding=serialization.Encoding.PEM,
+    format=serialization.PublicFormat.PKCS1
+)
+
+sock.send(public_key_pem)
+
+server_public_key_pem = sock.recv(1024)
+server_public_key = serialization.load_pem_public_key(server_public_key_pem)
+
+
+symmetric_key = os.urandom(12)
+
+encrypted_symmetric_key = server_public_key.encrypt(
+    symmetric_key,
+    padding.OAEP(mgf=padding.MGF1(algorithm=hashes.SHA256()), algorithm=hashes.SHA256(), label=None)
+)
+
+
+
+sock.send(encrypted_symmetric_key)
+
+while True:
+    pozdrav = input("Unesi poruku:")
+    podaci = pozdrav.encode()
+    sock.send(podaci)
+   
+    
+    print(podaci)
+    if pozdrav=='q':
+        break
+sock.close()
+
+
+import socket
+from cryptography.hazmat.primitives.asymmetric import rsa
+from cryptography.hazmat.primitives import serialization
+from cryptography.hazmat.primitives import hashes
+from cryptography.hazmat.primitives.asymmetric import padding
+import os
+
+
+sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+sock.bind(('localhost', 6000))
+sock.listen(1)
+clisock, addr = sock.accept()
+
+private_key = rsa.generate_private_key(
+    public_exponent=65537,
+    key_size=2048,
+)
+
+private_key_pem = private_key.private_bytes(
+    encoding=serialization.Encoding.PEM,
+    format=serialization.PrivateFormat.PKCS8,
+    encryption_algorithm=serialization.BestAvailableEncryption(b'1234')
+)
+
+public_key = private_key.public_key()
+
+public_key_pem = public_key.public_bytes(
+    encoding=serialization.Encoding.PEM,
+    format=serialization.PublicFormat.PKCS1
+)
+
+clisock.send(public_key_pem)
+
+client_public_key_pem = clisock.recv(1024)
+client_public_key = serialization.load_pem_public_key(client_public_key_pem)
+
+encrypted_symmetric_key = clisock.recv(1024)
+
+symmetric_key = private_key.decrypt(
+    encrypted_symmetric_key,
+    padding.OAEP(mgf=padding.MGF1(algorithm=hashes.SHA256()), algorithm=hashes.SHA256(), label=None)
+)
+while True:
+    podaci = clisock.recv(1024)
+    if not podaci:
+        break
+    pozdrav = podaci.decode()
+    print(pozdrav)
+    poslani_podaci = pozdrav.encode()
+    clisock.send(poslani_podaci)
+clisock.close()
+sock.close()

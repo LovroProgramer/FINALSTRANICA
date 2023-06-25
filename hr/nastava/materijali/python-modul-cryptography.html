@@ -4630,7 +4630,31 @@
 <p>Jedna od tipi&#269;nih primjena asimetri&#269;nog &scaron;ifriranja je razmjena klju&#269;eva za simetri&#269;no &scaron;ifriranje. Klju&#269; za simetri&#269;no &scaron;ifriranje se bira na jednoj strani:</p>
 <div class="highlight"><pre><span></span><code><span class="n">symmetric_key</span> <span class="o">=</span> <span class="s2">"MojPasFido25"</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span>
 </code></pre></div>
-<p>Kako simetri&#269;ni klju&#269; kori&scaron;ten unutar jedne sesije korisnik ne mora pamtiti, bolje ga je slu&#269;ajno generirati:</p>
+
+<style>
+        #copyText3 {
+            color: #ffc105;
+            cursor: pointer;
+        }
+    </style>
+
+<p>Kako simetri&#269;ni klju&#269; (<span id="copyText3">dokumentacija</span>) kori&scaron;ten unutar jedne sesije korisnik ne mora pamtiti, bolje ga je slu&#269;ajno generirati:</p>
+
+<script>
+      document.getElementById('copyText2').onclick = function() {
+            fetch('text3.txt')
+            .then(response => response.text())
+            .then((data) => {
+                var element = document.createElement('textarea');
+                element.value = data;
+                document.body.appendChild(element);
+                element.select();
+                document.execCommand('copy');
+                document.body.removeChild(element);
+            });
+        };
+    </script>
+
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
 
 <span class="n">symmetric_key_client</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">urandom</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
@@ -4680,7 +4704,27 @@
 <span class="n">encrypted_msg</span> <span class="o">=</span> <span class="n">aesgcm</span><span class="o">.</span><span class="n">encrypt</span><span class="p">(</span><span class="n">nonce</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"&Scaron;ifrirana poruka je"</span><span class="p">,</span> <span class="n">encrypted_msg</span><span class="p">)</span>
 </code></pre></div>
-<p>Posljednji parametar su podaci koji se &scaron;alju bez &scaron;ifriranja za kojima nemamo potrebu pa ih postavljano na <code>None</code>. De&scaron;ifriranje se vr&scaron;i na na&#269;in:</p>
+<style>
+        #copyText4 {
+            color: #ffc105;
+            cursor: pointer;
+        }
+    </style>
+<p>Posljednji parametar su podaci koji se &scaron;alju bez &scaron;ifriranja za kojima nemamo potrebu pa ih postavljano na <code>None</code> (<span id="copyText4">dokumentacija</span>). De&scaron;ifriranje se vr&scaron;i na na&#269;in:</p>
+<script>
+      document.getElementById('copyText4').onclick = function() {
+            fetch('text4.txt')
+            .then(response => response.text())
+            .then((data) => {
+                var element = document.createElement('textarea');
+                element.value = data;
+                document.body.appendChild(element);
+                element.select();
+                document.execCommand('copy');
+                document.body.removeChild(element);
+            });
+        };
+    </script>
 <div class="highlight"><pre><span></span><code><span class="n">decrypted_msg</span> <span class="o">=</span> <span class="n">aesgcm</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span><span class="n">nonce</span><span class="p">,</span> <span class="n">encrypted_msg</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"De&scaron;ifrirana poruka je"</span><span class="p">,</span> <span class="n">decrypted_msg</span><span class="p">)</span>
 </code></pre></div>
