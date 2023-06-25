@@ -4905,6 +4905,24 @@
 </div>
 <h3 id="jednokratne-zaporke-temeljene-na-vremenu">Jednokratne zaporke temeljene na vremenu</h3>
 
+
+
+
+<p>Inicijalizacija TOTP-a vr&scaron;i se na na&#269;in:</p>
+
+
+
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">cryptography.hazmat.primitives.twofactor.totp</span> <span class="kn">import</span> <span class="n">TOTP</span>
+<span class="kn">from</span> <span class="nn">cryptography.hazmat.primitives.hashes</span> <span class="kn">import</span> <span class="n">SHA1</span>
+
+<span class="n">key</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">urandom</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+
+<span class="n">totp</span> <span class="o">=</span> <span class="n">TOTP</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="n">SHA1</span><span class="p">(),</span> <span class="mi">30</span><span class="p">)</span>
+</code></pre></div>
+
+
 <style>
         #copyText8 {
             color: #ffc105;
@@ -4912,8 +4930,7 @@
         }
     </style>
 
-
-<p>Inicijalizacija TOTP-a (<span id="copyTex8t">dokumentacija</span>) vr&scaron;i se na na&#269;in:</p>
+<p>Drugi parametar kod TOTP-a je, kao i kod HOTP-a (<span id="copyText8">dokumentacija</span>), broj znakova koje &#263;e generirane zaporke imati. Posljednji navedeni parametar je vremenski korak u sekundama, odnosno interval nakon kojeg &#263;e do&#263;i idu&#263;a jednokratna zaporka.</p>
 
 <script>
       document.getElementById('copyTex8t').onclick = function() {
@@ -4929,17 +4946,6 @@
             });
         };
     </script>
-
-<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">time</span>
-<span class="kn">from</span> <span class="nn">cryptography.hazmat.primitives.twofactor.totp</span> <span class="kn">import</span> <span class="n">TOTP</span>
-<span class="kn">from</span> <span class="nn">cryptography.hazmat.primitives.hashes</span> <span class="kn">import</span> <span class="n">SHA1</span>
-
-<span class="n">key</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">urandom</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
-
-<span class="n">totp</span> <span class="o">=</span> <span class="n">TOTP</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="n">SHA1</span><span class="p">(),</span> <span class="mi">30</span><span class="p">)</span>
-</code></pre></div>
-<p>Drugi parametar kod TOTP-a je, kao i kod HOTP-a (<span id="copyText8">dokumentacija</span>), broj znakova koje &#263;e generirane zaporke imati. Posljednji navedeni parametar je vremenski korak u sekundama, odnosno interval nakon kojeg &#263;e do&#263;i idu&#263;a jednokratna zaporka.</p>
 <p>Nakon inicijalizacije mogu&#263;e je generirati niz jednokratnih zaporki navo&#273;enjem vremena:</p>
 <div class="highlight"><pre><span></span><code><span class="n">time_moment1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
 <span class="n">totp_value1</span> <span class="o">=</span> <span class="n">totp</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">time_moment1</span><span class="p">)</span>
