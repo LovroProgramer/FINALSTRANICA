@@ -4939,7 +4939,7 @@
 
 <span class="n">totp</span> <span class="o">=</span> <span class="n">TOTP</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="n">SHA1</span><span class="p">(),</span> <span class="mi">30</span><span class="p">)</span>
 </code></pre></div>
-<p>Drugi parametar kod TOTP-a je, kao i kod HOTP-a, broj znakova koje &#263;e generirane zaporke imati. Posljednji navedeni parametar je vremenski korak u sekundama, odnosno interval nakon kojeg &#263;e do&#263;i idu&#263;a jednokratna zaporka.</p>
+<p>Drugi parametar kod TOTP-a je, kao i kod HOTP-a (<span id="copyText8">dokumentacija</span>), broj znakova koje &#263;e generirane zaporke imati. Posljednji navedeni parametar je vremenski korak u sekundama, odnosno interval nakon kojeg &#263;e do&#263;i idu&#263;a jednokratna zaporka.</p>
 <p>Nakon inicijalizacije mogu&#263;e je generirati niz jednokratnih zaporki navo&#273;enjem vremena:</p>
 <div class="highlight"><pre><span></span><code><span class="n">time_moment1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
 <span class="n">totp_value1</span> <span class="o">=</span> <span class="n">totp</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">time_moment1</span><span class="p">)</span>
