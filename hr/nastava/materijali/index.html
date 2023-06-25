@@ -1,0 +1,5057 @@
+<!DOCTYPE html>
+<html lang="hr" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Group for Apps and Services on Exascale Research Infrastructure is a research, development, and teaching unit at FIDIT, UniRi.">
+      
+      
+        <meta name="author" content="Vedran Mileti&#263;">
+      
+      
+        <link rel="canonical" href="https://gaseri.org/hr/nastava/materijali/python-modul-cryptography/">
+      
+      
+        <link rel="prev" href="../python-modul-calendar/">
+      
+      
+        <link rel="next" href="../python-modul-django/">
+      
+      <link rel="icon" href="favicons/images-favicon.png">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.16">
+    
+    
+      
+        <title>Rad s Python modulom pyca/cryptography - GASERI</title>
+      
+    
+    
+      <link rel="stylesheet" href="css/stylesheets-main.26e3688c.min.css">
+      
+        
+        <link rel="stylesheet" href="css/stylesheets-palette.ecc896b0.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Sans:300,300i,400,400i,700,700i%7CFira+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Fira Sans";--md-code-font:"Fira Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+
+  <script id="__analytics">function __md_analytics(){function n(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],n("js",new Date),n("config","G-3CSW7LLM5F"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){this.value&&n("event","search",{search_term:this.value})}),document$.subscribe(function(){var a=document.forms.feedback;if(void 0!==a)for(var e of a.querySelectorAll("[type=submit]"))e.addEventListener("click",function(e){e.preventDefault();var t=document.location.pathname,e=this.getAttribute("data-md-value");n("event","feedback",{page:t,data:e}),a.firstElementChild.disabled=!0;e=a.querySelector(".md-feedback__note [data-md-value='"+e+"']");e&&(e.hidden=!1)}),a.hidden=!1}),location$.subscribe(function(e){n("config","G-3CSW7LLM5F",{page_path:e.pathname})})});var e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-3CSW7LLM5F",document.getElementById("__analytics").insertAdjacentElement("afterEnd",e)}</script>
+
+  
+    <script>var consent;"undefined"==typeof __md_analytics||(consent=__md_get("__consent"))&&consent.analytics&&__md_analytics()</script>
+  
+
+    
+    
+      
+        <meta property="og:type" content="website">
+      
+        <meta property="og:title" content="Rad s Python modulom pyca/cryptography - GASERI">
+      
+        <meta property="og:description" content="Group for Apps and Services on Exascale Research Infrastructure is a research, development, and teaching unit at FIDIT, UniRi.">
+      
+        <meta property="og:image" content="https://gaseri.org/assets/images/social/hr/nastava/materijali/python-modul-cryptography.png">
+      
+        <meta property="og:image:type" content="image/png">
+      
+        <meta property="og:image:width" content="1200">
+      
+        <meta property="og:image:height" content="630">
+      
+        <meta property="og:url" content="https://gaseri.org/hr/nastava/materijali/python-modul-cryptography/">
+      
+        <meta name="twitter:card" content="summary_large_image">
+      
+        <meta name="twitter:title" content="Rad s Python modulom pyca/cryptography - GASERI">
+      
+        <meta name="twitter:description" content="Group for Apps and Services on Exascale Research Infrastructure is a research, development, and teaching unit at FIDIT, UniRi.">
+      
+        <meta name="twitter:image" content="https://gaseri.org/assets/images/social/hr/nastava/materijali/python-modul-cryptography.png">
+      
+    
+    
+  
+  
+    <meta http-equiv="onion-location" content="http://vcwkbqby652dtqgbtbtr6ouvs6fu5abx5z45dmlug6dl55d6zcadsuqd.onion/hr/nastava/materijali/python-modul-cryptography/">
+  
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="amber" data-md-color-accent="amber">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#rad-s-python-modulom-pycacryptography" class="md-skip">
+          Presko&#269;i na sadr&#382;aj
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+        <aside class="md-banner">
+          <div class="md-banner__inner md-grid md-typeset">
+            
+              <button class="md-banner__button md-icon" aria-label="Ne prikazuj ovo opet">
+                <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"></path></svg>
+              </button>
+            
+            
+  Follow us on <a href="https://www.linkedin.com/company/gaseri"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"></path></svg></span> LinkedIn</a>, <a href="https://twitter.com/gaseri_org"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 512 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"></path></svg></span> Twitter</a>, and <a href="https://t.me/+qHedXt0OXm4yMzc8"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 496 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M248 8C111.033 8 0 119.033 0 256s111.033 248 248 248 248-111.033 248-248S384.967 8 248 8Zm114.952 168.66c-3.732 39.215-19.881 134.378-28.1 178.3-3.476 18.584-10.322 24.816-16.948 25.425-14.4 1.326-25.338-9.517-39.287-18.661-21.827-14.308-34.158-23.215-55.346-37.177-24.485-16.135-8.612-25 5.342-39.5 3.652-3.793 67.107-61.51 68.335-66.746.153-.655.3-3.1-1.154-4.384s-3.59-.849-5.135-.5q-3.283.746-104.608 69.142-14.845 10.194-26.894 9.934c-8.855-.191-25.888-5.006-38.551-9.123-15.531-5.048-27.875-7.717-26.8-16.291q.84-6.7 18.45-13.7 108.446-47.248 144.628-62.3c68.872-28.647 83.183-33.623 92.511-33.789 2.052-.034 6.639.474 9.61 2.885a10.452 10.452 0 0 1 3.53 6.716 43.765 43.765 0 0 1 .417 9.769Z"></path></svg></span> Telegram</a> for updates.
+
+          </div>
+          
+            <script>var content,el=document.querySelector("[data-md-component=announce]");el&&(content=el.querySelector(".md-typeset"),__md_hash(content.innerHTML)===__md_get("__announce")&&(el.hidden=!0))</script>
+          
+        </aside>
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Zaglavlje">
+    <a href="..html" title="GASERI" class="md-header__button md-logo" aria-label="GASERI" data-md-component="logo">
+      
+  <img src="images/images-gaseri-logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            GASERI
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Rad s Python modulom pyca/cryptography
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+          
+            
+            
+            
+            <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="amber" data-md-color-accent="amber" aria-label="Switch to dark mode" type="radio" name="__palette" id="__palette_1">
+            
+              <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+                <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"></path></svg>
+              </label>
+            
+          
+            
+            
+            
+            <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="amber" data-md-color-accent="amber" aria-label="Switch to light mode" type="radio" name="__palette" id="__palette_2">
+            
+              <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+                <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"></path></svg>
+              </label>
+            
+          
+        </form>
+      
+    
+    
+      <div class="md-header__option">
+        <div class="md-select">
+          
+          <button class="md-header__button md-icon" aria-label="Odabir jezika">
+            <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.52 17.52 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04M18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12m-2.62 7 1.62-4.33L19.12 17h-3.24Z"></path></svg>
+          </button>
+          <div class="md-select__inner">
+            <ul class="md-select__list">
+              
+                <li class="md-select__item">
+                  <a href="hr.html" hreflang="hr" class="md-select__link">
+                    Croatian
+                  </a>
+                </li>
+              
+                <li class="md-select__item">
+                  <a href="en.html" hreflang="en" class="md-select__link">
+                    English
+                  </a>
+                </li>
+              
+            </ul>
+          </div>
+        </div>
+      </div>
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"></path></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Pretra&#382;i" placeholder="Pretra&#382;i" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"></path></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"></path></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pretra&#382;ivanje">
+        
+        <button type="reset" class="md-search__icon md-icon" title="O&#269;isti" aria-label="O&#269;isti" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"></path></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicijaliziranje pretra&#382;ivanja
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/gaseri/website/" title="Idi u repozitorij" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Kartice" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="..html" class="md-tabs__link">
+      GASERI
+    </a>
+  </li>
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="..html" class="md-tabs__link md-tabs__link--active">
+        &#127469;&#127479; Sadr&#382;aj na hrvatskom
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="en.html" class="md-tabs__link">
+        &#127482;&#127480; Contents in English
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigacija" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="..html" title="GASERI" class="md-nav__button md-logo" aria-label="GASERI" data-md-component="logo">
+      
+  <img src="images/images-gaseri-logo.svg" alt="logo">
+
+    </a>
+    GASERI
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/gaseri/website/" title="Idi u repozitorij" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="..html" class="md-nav__link">
+        GASERI
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="..html">&#127469;&#127479; Sadr&#382;aj na hrvatskom</a>
+          
+            <label for="__nav_2">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          &#127469;&#127479; Sadr&#382;aj na hrvatskom
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2">
+      
+      
+        
+          
+            
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="ljudi.html">Ljudi</a>
+          
+            <label for="__nav_2_2">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Ljudi
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="kako-se-ukljuciti.html" class="md-nav__link">
+        Kako se uklju&#269;iti
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="znanstveni-program-mentora.html" class="md-nav__link">
+        Znanstveni program mentora
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="istrazivanje-i-razvoj.html" class="md-nav__link">
+        Istra&#382;ivanje i razvoj
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="partnerstva-i-suradnje.html" class="md-nav__link">
+        Partnerstva i suradnje
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="kontakt.html" class="md-nav__link">
+        Kontakt
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" checked>
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="..html">Nastava</a>
+          
+            <label for="__nav_2_7">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_2_7">
+          <span class="md-nav__icon md-icon"></span>
+          Nastava
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7_2">
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2_7_2" id="__nav_2_7_2_label" tabindex="0">
+          Izvedbeni planovi
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_7_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_7_2">
+          <span class="md-nav__icon md-icon"></span>
+          Izvedbeni planovi
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7_2_1">
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2_7_2_1" id="__nav_2_7_2_1_label" tabindex="0">
+          Akademska godina 2022./2023.
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_7_2_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_7_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          Akademska godina 2022./2023.
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="AOR.html" class="md-nav__link">
+        Arhitektura i organizacija ra&#269;unala
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="INF-BioTech.html" class="md-nav__link">
+        Informatika (BioTech)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="INF-Pharma.html" class="md-nav__link">
+        Informatika za farmaceute (MedRi)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="IPVO.html" class="md-nav__link">
+        Infrastruktura za podatke velikog obujma
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="MMOS.html" class="md-nav__link">
+        Mre&#382;ni i mobilni operacijski sustavi
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="OPK.html" class="md-nav__link">
+        Optimizacija programskog koda
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PW.html" class="md-nav__link">
+        Programiranje za web
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="RM.html" class="md-nav__link">
+        Ra&#269;unalne mre&#382;e
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="UMS.html" class="md-nav__link">
+        Upravljanje mre&#382;nim sustavima
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="URS.html" class="md-nav__link">
+        Upravljanje ra&#269;unalnim sustavima
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7_2_2">
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2_7_2_2" id="__nav_2_7_2_2_label" tabindex="0">
+          Akademska godina 2021./2022.
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_7_2_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_7_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Akademska godina 2021./2022.
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="DWA2.html" class="md-nav__link">
+        Dinami&#269;ke web aplikacije 2
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="DS.html" class="md-nav__link">
+        Distribuirani sustavi
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="MMOS.html" class="md-nav__link">
+        Mre&#382;ni i mobilni operacijski sustavi
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PW.html" class="md-nav__link">
+        Programiranje za web
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="RM.html" class="md-nav__link">
+        Ra&#269;unalne mre&#382;e
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="RM1.html" class="md-nav__link">
+        Ra&#269;unalne mre&#382;e 1
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="SIKS.html" class="md-nav__link">
+        Sigurnost informacijskih i komunikacijskih sustava
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="UMS.html" class="md-nav__link">
+        Upravljanje mre&#382;nim sustavima
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="URS.html" class="md-nav__link">
+        Upravljanje ra&#269;unalnim sustavima
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7_2_3">
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2_7_2_3" id="__nav_2_7_2_3_label" tabindex="0">
+          Akademska godina 2020./2021.
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_7_2_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_7_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Akademska godina 2020./2021.
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="DS.html" class="md-nav__link">
+        Distribuirani sustavi
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="DWA2.html" class="md-nav__link">
+        Dinami&#269;ke web aplikacije 2
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="INF-BioTech.html" class="md-nav__link">
+        Informatika (BioTech)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="OS2.html" class="md-nav__link">
+        Operacijski sustavi 2
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PPHS.html" class="md-nav__link">
+        Paralelno programiranje na heterogenim sustavima
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="RM.html" class="md-nav__link">
+        Ra&#269;unalne mre&#382;e
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="RM1.html" class="md-nav__link">
+        Ra&#269;unalne mre&#382;e 1
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="RM2.html" class="md-nav__link">
+        Ra&#269;unalne mre&#382;e 2
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="SIKS.html" class="md-nav__link">
+        Sigurnost informacijskih i komunikacijskih sustava
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="UMS.html" class="md-nav__link">
+        Upravljanje mre&#382;nim sustavima
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7_2_4">
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2_7_2_4" id="__nav_2_7_2_4_label" tabindex="0">
+          Akademska godina 2019./2020.
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_7_2_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_7_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          Akademska godina 2019./2020.
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="DS.html" class="md-nav__link">
+        Distribuirani sustavi
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="INF-BioTech.html" class="md-nav__link">
+        Informatika (BioTech)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="OS2.html" class="md-nav__link">
+        Operacijski sustavi 2
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PPHS.html" class="md-nav__link">
+        Paralelno programiranje na heterogenim sustavima
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="RM1.html" class="md-nav__link">
+        Ra&#269;unalne mre&#382;e 1
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="RM2.html" class="md-nav__link">
+        Ra&#269;unalne mre&#382;e 2
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="UMS.html" class="md-nav__link">
+        Upravljanje mre&#382;nim sustavima
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7_2_5">
+      
+      
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2_7_2_5" id="__nav_2_7_2_5_label" tabindex="0">
+          Akademska godina 2018./2019.
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_7_2_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_7_2_5">
+          <span class="md-nav__icon md-icon"></span>
+          Akademska godina 2018./2019.
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="INF-BioTech.html" class="md-nav__link">
+        Informatika (BioTech)
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7_3">
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2_7_3" id="__nav_2_7_3_label" tabindex="0">
+          Kolegiji
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_7_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_7_3">
+          <span class="md-nav__icon md-icon"></span>
+          Kolegiji
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="AOR.html" class="md-nav__link">
+        Arhitektura i organizacija ra&#269;unala
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="DS.html" class="md-nav__link">
+        Distribuirani sustavi
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="DWA2.html" class="md-nav__link">
+        Dinami&#269;ke web aplikacije 2
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="INF-BioTech.html" class="md-nav__link">
+        Informatika (BioTech)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="INF-Pharma.html" class="md-nav__link">
+        Informatika za farmaceute (MedRi)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="IPVO.html" class="md-nav__link">
+        Infrastruktura za podatke velikog obujma
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="KM.html" class="md-nav__link">
+        Komunikacijske mre&#382;e
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="MMOS.html" class="md-nav__link">
+        Mre&#382;ni i mobilni operacijski sustavi
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="OI1.html" class="md-nav__link">
+        Osnove informatike 1
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="OPK.html" class="md-nav__link">
+        Optimizacija programskog koda
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="OS1.html" class="md-nav__link">
+        Operacijski sustavi 1
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="OS2.html" class="md-nav__link">
+        Operacijski sustavi 2
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PPHS.html" class="md-nav__link">
+        Paralelno programiranje na heterogenim sustavima
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PW.html" class="md-nav__link">
+        Programiranje za web
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="RBKBF.html" class="md-nav__link">
+        Ra&#269;unalna biokemija i biofizika
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="RM.html" class="md-nav__link">
+        Ra&#269;unalne mre&#382;e
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="RM1.html" class="md-nav__link">
+        Ra&#269;unalne mre&#382;e 1
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="RM2.html" class="md-nav__link">
+        Ra&#269;unalne mre&#382;e 2
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="RM-RiTeh.html" class="md-nav__link">
+        Ra&#269;unalne mre&#382;e (RiTeh)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="SIKS.html" class="md-nav__link">
+        Sigurnost informacijskih i komunikacijskih sustava
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="SRS.html" class="md-nav__link">
+        Superra&#269;unalni sustavi
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="UMS.html" class="md-nav__link">
+        Upravljanje mre&#382;nim sustavima
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="URS.html" class="md-nav__link">
+        Upravljanje ra&#269;unalnim sustavima
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7_4" checked>
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2_7_4" id="__nav_2_7_4_label" tabindex="0">
+          Nastavni materijali
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_7_4_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_2_7_4">
+          <span class="md-nav__icon md-icon"></span>
+          Nastavni materijali
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+  
+            
+          
+            
+              
+  
+  
+  
+    
+              
+  
+  
+  
+   
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="obs-studio-snimanje.html" class="md-nav__link">
+        Snimanje zvuka, videa i dijelova zaslona programom OBS Studio
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="oi1-linux-upravljanje-datotecnim-sustavom-2.html" class="md-nav__link">
+        Pretra&#382;ivanje, prava pristupa, rad sa tekstom
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="oi1-linux-upravljanje-datotecnim-sustavom.html" class="md-nav__link">
+        Osnove rada sa komandnom linijom
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7_5">
+      
+      
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2_7_5" id="__nav_2_7_5_label" tabindex="0">
+          Programi studija
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_7_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_7_5">
+          <span class="md-nav__icon md-icon"></span>
+          Programi studija
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7_5_1">
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2_7_5_1" id="__nav_2_7_5_1_label" tabindex="0">
+          Verzija 2022./2023.
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_7_5_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_7_5_1">
+          <span class="md-nav__icon md-icon"></span>
+          Verzija 2022./2023.
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="IPVO.html" class="md-nav__link">
+        Infrastruktura za podatke velikog obujma
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="KM.html" class="md-nav__link">
+        Komunikacijske mre&#382;e
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="OPK.html" class="md-nav__link">
+        Optimizacija programskog koda
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PW.html" class="md-nav__link">
+        Programiranje za web
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="RBKBF.html" class="md-nav__link">
+        Ra&#269;unalna biokemija i biofizika
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="RM.html" class="md-nav__link">
+        Ra&#269;unalne mre&#382;e
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="URS.html" class="md-nav__link">
+        Upravljanje ra&#269;unalnim sustavima
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="racunalni-praktikumi.html" class="md-nav__link">
+        Ra&#269;unalni praktikumi
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="teme-zavrsnih-i-diplomskih-radova.html" class="md-nav__link">
+        Teme zavr&scaron;nih i diplomskih radova
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_9">
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="principal-investigator.html" class="md-nav__link">
+        Principal investigator
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="phd-students.html" class="md-nav__link">
+        PhD students
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="projects.html" class="md-nav__link">
+        Projects
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="publications.html" class="md-nav__link">
+        Publications
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="software.html" class="md-nav__link">
+        Software
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="services.html" class="md-nav__link">
+        Services
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="contact.html" class="md-nav__link">
+        Contact
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_9">
+      
+      
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_3_9" id="__nav_3_9_label" tabindex="0">
+          Talks
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_9_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_9">
+          <span class="md-nav__icon md-icon"></span>
+          Talks
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="2022-01-26-the-challenges-of-the-upcoming-exascale-supercomputing-era-in-computational-biochemistry.html" class="md-nav__link">
+        The challenges of the upcoming exascale supercomputing era in computational biochemistry
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="2022-09-23-extending-non-equilibrium-pulling-method-in-gromacs-with-arbitrary-user-defined-atom-weight-factor-expressions.html" class="md-nav__link">
+        Extending Non-Equilibrium Pulling Method in GROMACS with Arbitrary User-Defined Atom Weight Factor Expressions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="2023-03-30-chatgpt-from-teachers-perspective.html" class="md-nav__link">
+        ChatGPT from teacher's perspective
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_10">
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="teaching.html">Teaching</a>
+          
+            <label for="__nav_3_10">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_10_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_10">
+          <span class="md-nav__icon md-icon"></span>
+          Teaching
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_10_2">
+      
+      
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_3_10_2" id="__nav_3_10_2_label" tabindex="0">
+          Courses
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_10_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_10_2">
+          <span class="md-nav__icon md-icon"></span>
+          Courses
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="CO.html" class="md-nav__link">
+        Code optimization
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_10_3">
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_3_10_3" id="__nav_3_10_3_label" tabindex="0">
+          Materials
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_10_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_10_3">
+          <span class="md-nav__icon md-icon"></span>
+          Materials
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="llvm-clang.html" class="md-nav__link">
+        The Clang compiler
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="llvm-development-analysis-and-transformation.html" class="md-nav__link">
+        Implementing an analysis and transformation pass in the LLVM compiler infrastructure
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="llvm-development.html" class="md-nav__link">
+        Developing with the LLVM compiler infrastructure
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="llvm-intermediate-representation.html" class="md-nav__link">
+        The LLVM intermediate representation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="llvm-mesa.html" class="md-nav__link">
+        The usage of the LLVM libraries in the Mesa 3D graphics library
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="llvm-tools.html" class="md-nav__link">
+        The LLVM tools
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="mips-instruction-set.html" class="md-nav__link">
+        MIPS Instruction Set Cheat Sheet
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="opt-intro.html" class="md-nav__link">
+        Code optimization -- course introduction
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_10_4">
+      
+      
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_3_10_4" id="__nav_3_10_4_label" tabindex="0">
+          Programmes
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_10_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_10_4">
+          <span class="md-nav__icon md-icon"></span>
+          Programmes
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_10_4_1">
+      
+      
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_3_10_4_1" id="__nav_3_10_4_1_label" tabindex="0">
+          Revision 2022/2023
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_10_4_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_10_4_1">
+          <span class="md-nav__icon md-icon"></span>
+          Revision 2022/2023
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="BDI.html" class="md-nav__link">
+        Big Data Infrastructure
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="CBCBP.html" class="md-nav__link">
+        Computational Biochemistry and Biophysics
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_10_4_2">
+      
+      
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_3_10_4_2" id="__nav_3_10_4_2_label" tabindex="0">
+          Revision 2021/2022
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_10_4_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_10_4_2">
+          <span class="md-nav__icon md-icon"></span>
+          Revision 2021/2022
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="CO.html" class="md-nav__link">
+        Code Optimization
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_10_4_3">
+      
+      
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_3_10_4_3" id="__nav_3_10_4_3_label" tabindex="0">
+          Revision 2019/2020
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_10_4_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_10_4_3">
+          <span class="md-nav__icon md-icon"></span>
+          Revision 2019/2020
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="CO.html" class="md-nav__link">
+        Code Optimization
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_11">
+      
+      
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_3_11" id="__nav_3_11_label" tabindex="0">
+          Tutorials
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_11_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_11">
+          <span class="md-nav__icon md-icon"></span>
+          Tutorials
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_11_1">
+      
+      
+        
+          
+            
+          
+        
+          
+            
+          
+        
+          
+            
+          
+        
+          
+            
+          
+        
+          
+            
+          
+        
+          
+            
+          
+        
+          
+            
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="gromacs.html">GROMACS</a>
+          
+            <label for="__nav_3_11_1">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_11_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_11_1">
+          <span class="md-nav__icon md-icon"></span>
+          GROMACS
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="1-tip4pew-water.html" class="md-nav__link">
+        Water
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="2-methane-in-water.html" class="md-nav__link">
+        One methane in water
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="3-methanes-in-water.html" class="md-nav__link">
+        Several methanes in water
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="4-methane-fe.html" class="md-nav__link">
+        Free energy of solvation of methane
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="5-umbrella.html" class="md-nav__link">
+        Window sampling
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="6-tpi.html" class="md-nav__link">
+        Test particle insertion
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="bura-hpc.html" class="md-nav__link">
+        Bura HPC
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="zettlr.html" class="md-nav__link">
+        Zettlr
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_12">
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="blog.html">Blog</a>
+          
+            <label for="__nav_3_12">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_12_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_12">
+          <span class="md-nav__icon md-icon"></span>
+          Blog
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_12_2">
+      
+      
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_3_12_2" id="__nav_3_12_2_label" tabindex="0">
+          Year 2023
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_12_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_12_2">
+          <span class="md-nav__icon md-icon"></span>
+          Year 2023
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="2023-06-10-should-i-do-a-phd.html" class="md-nav__link">
+        Should I do a Ph.D.?
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_12_3">
+      
+      
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_3_12_3" id="__nav_3_12_3_label" tabindex="0">
+          Year 2022
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_12_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_12_3">
+          <span class="md-nav__icon md-icon"></span>
+          Year 2022
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="2022-11-01-publishing-material-for-mkdocs-website-to-github-pages-using-custom-actions-workflow.html" class="md-nav__link">
+        Publishing (Material for) MkDocs website to GitHub Pages using custom Actions workflow
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="2022-02-24-dont-use-rar.html" class="md-nav__link">
+        Don't use RAR
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_12_4">
+      
+      
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_3_12_4" id="__nav_3_12_4_label" tabindex="0">
+          Year 2021
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_12_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_12_4">
+          <span class="md-nav__icon md-icon"></span>
+          Year 2021
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="2021-08-16-markdown-vs-restructuredtext-for-teaching-materials.html" class="md-nav__link">
+        Markdown vs reStructuredText for teaching materials
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_12_5">
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_3_12_5" id="__nav_3_12_5_label" tabindex="0">
+          Year 2017
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_12_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_12_5">
+          <span class="md-nav__icon md-icon"></span>
+          Year 2017
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="2017-09-24-mirroring-free-and-open-source-software-matters.html" class="md-nav__link">
+        Mirroring free and open-source software matters
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="2017-07-31-fly-away-little-bird.html" class="md-nav__link">
+        Fly away, little bird
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="2017-07-29-why-we-use-restructuredtext-and-sphinx-static-site-generator-for-maintaining-teaching-materials.html" class="md-nav__link">
+        Why we use reStructuredText and Sphinx static site generator for maintaining teaching materials
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="2017-07-22-enabling-http2-https-and-going-https-only-on-inf2.html" class="md-nav__link">
+        Enabling HTTP/2, HTTPS, and going HTTPS-only on inf2
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_12_6">
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_3_12_6" id="__nav_3_12_6_label" tabindex="0">
+          Year 2016
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_12_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_12_6">
+          <span class="md-nav__icon md-icon"></span>
+          Year 2016
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="2016-12-14-celebrating-graphics-and-compute-freedom-day.html" class="md-nav__link">
+        Celebrating Graphics and Compute Freedom Day
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="2016-03-25-the-academic-and-the-free-software-community-ideals.html" class="md-nav__link">
+        The academic and the free software community ideals
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="2016-02-23-free-to-know-open-access-and-open-source.html" class="md-nav__link">
+        Free to know -- Open access and open source
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="2016-01-30-i-am-still-not-buying-the-new-open-source-friendly-microsoft-narrative.html" class="md-nav__link">
+        I am still not buying the new-open-source-friendly-Microsoft narrative
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="2016-01-17-amd-and-the-open-source-community-are-writing-history.html" class="md-nav__link">
+        AMD and the open-source community are writing history
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_12_7">
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_3_12_7" id="__nav_3_12_7_label" tabindex="0">
+          Year 2015
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_12_7_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_12_7">
+          <span class="md-nav__icon md-icon"></span>
+          Year 2015
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="2015-12-13-on-having-leverage-and-using-it-for-pushing-open-source-software-adoption.html" class="md-nav__link">
+        On having leverage and using it for pushing open-source software adoption
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="2015-09-14-what-is-the-price-of-open-source-fear-uncertainty-and-doubt.html" class="md-nav__link">
+        What is the price of open-source fear, uncertainty, and doubt?
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="2015-07-28-joys-and-pains-of-interdisciplinary-research.html" class="md-nav__link">
+        Joys and pains of interdisciplinary research
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="2015-07-03-open-source-magic-all-around-the-world.html" class="md-nav__link">
+        Open-source magic all around the world
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="2015-06-18-the-follow-up.html" class="md-nav__link">
+        The follow-up
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="2015-05-01-browser-wars.html" class="md-nav__link">
+        Browser wars
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="very-important-information.html" class="md-nav__link">
+        Very important information
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Sadr&#382;aj">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Sadr&#382;aj
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#kodiranje-znakova" class="md-nav__link">
+    Kodiranje znakova
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#simetricna-kriptografija" class="md-nav__link">
+    Simetri&#269;na kriptografija
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#asimetricna-kriptografija" class="md-nav__link">
+    Asimetri&#269;na kriptografija
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#razmjena-simetricnih-kljuceva-koristenjem-asimetricnog-sifriranja" class="md-nav__link">
+    Razmjena simetri&#269;nih klju&#269;eva kori&scaron;tenjem asimetri&#269;nog &scaron;ifriranja
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#autentificirano-sifriranje" class="md-nav__link">
+    Autentificirano &scaron;ifriranje
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#autentifikacija-poruka" class="md-nav__link">
+    Autentifikacija poruka
+  </a>
+  
+    <nav class="md-nav" aria-label="Autentifikacija poruka">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#autentifikacija-poruka-temeljena-na-hashiranju" class="md-nav__link">
+    Autentifikacija poruka temeljena na hashiranju
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#autentifikacija-poruka-temeljena-na-sifriranju" class="md-nav__link">
+    Autentifikacija poruka temeljena na &scaron;ifriranju
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dvofaktorska-autentifikacija-i-jednokratne-zaporke" class="md-nav__link">
+    Dvofaktorska autentifikacija i jednokratne zaporke
+  </a>
+  
+    <nav class="md-nav" aria-label="Dvofaktorska autentifikacija i jednokratne zaporke">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#jednokratne-zaporke-temeljene-na-hmac-u" class="md-nav__link">
+    Jednokratne zaporke temeljene na HMAC-u
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#jednokratne-zaporke-temeljene-na-vremenu" class="md-nav__link">
+    Jednokratne zaporke temeljene na vremenu
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+  
+                  
+  
+
+
+
+  
+    <a href="https://github.com/gaseri/website/edit/main/docs/hr/nastava/materijali/python-modul-cryptography.md" title="Uredi stranicu" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4v-2m10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1 2.1 2.1Z"></path></svg>
+    </a>
+  
+  
+    
+      
+    
+    <a href="https://github.com/gaseri/website/raw/main/docs/hr/nastava/materijali/python-modul-cryptography.md" title="Pregledaj izvorni kod ove stranice" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.15 8.15 0 0 1-1.23-2Z"></path></svg>
+    </a>
+  
+
+
+<h1 id="rad-s-python-modulom-pycacryptography">Rad s Python modulom pyca/cryptography</h1>
+<p>Python u okviru svoje standardne biblioteke nudi kriptografske funkcije u modulu <code>crypto</code>, ali puno elegantniji za kori&scaron;tenje je modul <code>cryptography</code> (<a href="https://cryptography.io/">slu&#382;beno web sjedi&scaron;te</a>) razvijen od strane <a href="https://github.com/pyca">Python Cryptographic Authorityja</a>.</p>
+<p>Modul <code>cryptopgraphy</code> sastoji se od dva sloja:</p>
+<ul>
+<li>sloj recepata (engl. <em>recipes layer</em>) kod kojeg nije potrebno izvoditi detaljnu konfiguraciju, odnosno odabir parametara kori&scaron;tenih algoritama</li>
+<li>sloj opasnih materijala (engl. <em>hazardous materials layer</em>) koji nudi implementaciju kriptografskih algoritama za koje je nu&#382;no dobro poznavati teoriju koja se tih koncepata ti&#269;e</li>
+</ul>
+<h2 id="kodiranje-znakova">Kodiranje znakova</h2>
+<p>Znakovni nizovi u Pythonu dizajnirani su da slijede svakdonevno poimanje pojma teksta. Primjerice, znakovni niz <code>"rije&#269;"</code> je u Pythonu duljine 5 znakova, iako se posljednji znak u ra&#269;unalu kodira s 2 bajta (primjerice kod spremanja u datoteku ili slanja putem mre&#382;e) pa je duljina znakovnog niza 6 znakova.</p>
+<div class="highlight"><pre><span></span><code><span class="n">s</span> <span class="o">=</span> <span class="s2">"rije&#269;"</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Znakovni niz"</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="s2">"ima duljinu"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
+
+<span class="n">e</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Znakovni niz"</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="s2">"ima duljinu"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+</code></pre></div>
+<p>Kodiranje u obliku Base64 dostupno je kori&scaron;tenjem modula <code>base64</code> (<a href="https://docs.python.org/3/library/base64.html">dokumentacija</a>) koji je dio standardne biblioteke:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">base64</span> <span class="kn">import</span> <span class="n">b64encode</span><span class="p">,</span> <span class="n">b64decode</span>
+
+<span class="n">b</span> <span class="o">=</span> <span class="n">b64encode</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">b64decode</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+</code></pre></div>
+<div class="admonition admonition">
+<p class="admonition-title">Zadatak</p>
+<p>Usporedite duljinu:</p>
+<ol>
+<li>znakovnog niza u Pythonu</li>
+<li>niza bajtova dobivenih kodiranjem znakovnog niza</li>
+<li>znakovnog niza kodiranog metodom Base64</li>
+</ol>
+<p>za znakovni niz "Energi&#269;ni, za sve vrste egzistencije sposobni pojedinac najve&#263;i je kapital i jedini temelj na&scaron;eg narodnog kapitala, koji pada samo zato, jer rapidno pada kult moralni, fizi&#269;ki i intelektualni na&scaron;ih energija u pravcu &scaron;to ve&#263;e osobne i privatne inicijative." (<a href="https://hr.wikiquote.org/wiki/Antun_Gustav_Mato%C5%A1">Mato&scaron;ev citat</a>).</p>
+</div>
+<h2 id="simetricna-kriptografija">Simetri&#269;na kriptografija</h2>
+<style>
+        #copyText {
+            color: #ffc105;
+            cursor: pointer;
+        }
+    </style>
+    <p>Fernet (<span id="copyText">dokumentacija</span>) je skup recepata za simetričnu enkripciju u modulu <code>crytopgraphy</code>. Ime Fernet dolazi od <a href="https://en.wikipedia.org/wiki/Fernet">talijanskog likera popuarnog u Argentini</a>.</p>
+
+    <script>
+      document.getElementById('copyText').onclick = function() {
+            fetch('text.txt')
+            .then(response => response.text())
+            .then((data) => {
+                var element = document.createElement('textarea');
+                element.value = data;
+                document.body.appendChild(element);
+                element.select();
+                document.execCommand('copy');
+                document.body.removeChild(element);
+            });
+        };
+    </script>
+<p>Inicijalizacija se izvodi na na&#269;in:</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+
+<span class="kn">from</span> <span class="nn">cryptography.fernet</span> <span class="kn">import</span> <span class="n">Fernet</span>
+
+<span class="n">key</span> <span class="o">=</span> <span class="n">Fernet</span><span class="o">.</span><span class="n">generate_key</span><span class="p">()</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">Fernet</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+</code></pre></div>
+<p>S tako inicijaliziranim modulom &scaron;ifriranje se izvodi na na&#269;in:</p>
+<div class="highlight"><pre><span></span><code><span class="n">encrypted_message</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">encrypt</span><span class="p">(</span><span class="sa">b</span><span class="s2">"""</span><span class="se">\</span>
+<span class="s2">Jezik, &#269;ist materinji jezik poznavati je prva i najglavnija du&#382;nost svakog</span><span class="se">\</span>
+<span class="s2">pisca. Tko ga ne poznaje, mo&#382;e biti uman, odli&#269;an, zanimljiv &#269;ovjek, ali</span><span class="se">\</span>
+<span class="s2">dobar, uspje&scaron;an pisac &#8213; nikada. Poka&#382;ite mi na jednog jedinog ve&#263;eg pisca u</span><span class="se">\</span>
+<span class="s2">stranom svijetu &scaron;to grije&scaron;i proti pravilima svog jezika.</span><span class="se">\</span>
+<span class="s2">"""</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"&Scaron;ifrirana poruka je"</span><span class="p">,</span> <span class="n">encrypted_message</span><span class="p">)</span>
+</code></pre></div>
+<p>De&scaron;ifriranje se vr&scaron;i kodom:</p>
+<div class="highlight"><pre><span></span><code><span class="n">decrypted_message</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span><span class="n">encrypted_message</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"De&scaron;ifrirana poruka je"</span><span class="p">,</span> <span class="n">decrypted_message</span><span class="p">)</span>
+</code></pre></div>
+<div class="admonition admonition">
+<p class="admonition-title">Zadatak</p>
+<p>&Scaron;ifrirajte poruku po &#382;elji klju&#269;em koji &#263;ete generirati, a zatim poku&scaron;ajte de&scaron;ifrirati drugim klju&#269;em koji &#263;ete generirati i objasnite za&scaron;to to mo&#382;ete ili ne mo&#382;ete u&#269;initi.</p>
+</div>
+<p>Fernetom je mogu&#263;e &scaron;ifrirati i de&scaron;ifrirati kori&scaron;tenjem grupe klju&#269;eva. U tom slu&#269;aju &#263;e de&scaron;ifriranje biti isprobano svakim od dostupnih klju&#269;eva. Primjerice, za dva klju&#269;a kod za inicijalizaciju je oblika:</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+
+<span class="kn">from</span> <span class="nn">cryptography.fernet</span> <span class="kn">import</span> <span class="n">Fernet</span><span class="p">,</span> <span class="n">MultiFernet</span>
+<span class="n">k1</span> <span class="o">=</span> <span class="n">Fernet</span><span class="o">.</span><span class="n">generate_key</span><span class="p">()</span>
+<span class="n">f1</span> <span class="o">=</span> <span class="n">Fernet</span><span class="p">(</span><span class="n">k1</span><span class="p">)</span>
+<span class="n">k2</span> <span class="o">=</span> <span class="n">Fernet</span><span class="o">.</span><span class="n">generate_key</span><span class="p">()</span>
+<span class="n">f2</span> <span class="o">=</span> <span class="n">Fernet</span><span class="p">(</span><span class="n">k2</span><span class="p">)</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">MultiFernet</span><span class="p">([</span><span class="n">f1</span><span class="p">,</span> <span class="n">f2</span><span class="p">])</span>
+</code></pre></div>
+<p>&Scaron;ifriranje dvije poruke razli&#269;itim klju&#269;evima vr&scaron;imo na na&#269;in:</p>
+<div class="highlight"><pre><span></span><code><span class="n">encrypted_message1</span> <span class="o">=</span> <span class="n">f1</span><span class="o">.</span><span class="n">encrypt</span><span class="p">(</span><span class="sa">b</span><span class="s2">"Tajna poruka!"</span><span class="p">)</span>
+<span class="n">encrypted_message2</span> <span class="o">=</span> <span class="n">f2</span><span class="o">.</span><span class="n">encrypt</span><span class="p">(</span><span class="sa">b</span><span class="s2">"Isto tako tajna poruka!"</span><span class="p">)</span>
+</code></pre></div>
+<p>De&scaron;ifriranje:</p>
+<div class="highlight"><pre><span></span><code><span class="n">decrypted_message1</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span><span class="n">encrypted_message1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">decrypted_message1</span><span class="p">)</span>
+
+<span class="n">decrypted_message2</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span><span class="n">encrypted_message2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">decrypted_message2</span><span class="p">)</span>
+</code></pre></div>
+<p>Simetri&#269;ne klju&#269;eve mogu&#263;e je dodatno za&scaron;titi zaporkom, o &#269;emu se vi&scaron;e mo&#382;e na&#263;i u <a href="https://cryptography.io/en/latest/fernet/#using-passwords-with-fernet">slu&#382;benoj dokumentaciji</a>.</p>
+<h2 id="asimetricna-kriptografija">Asimetri&#269;na kriptografija</h2>
+<p>Modul <code>cryptography</code> podr&#382;ava niz asimetri&#269;nih kriptografskih algoritama (<a href="https://cryptography.io/en/latest/hazmat/primitives/asymmetric/">dokumentacija</a>), ali mi &#263;emo se ograni&#269;iti na kori&scaron;tenje RSA (<a href="https://cryptography.io/en/latest/hazmat/primitives/asymmetric/rsa/">dokumentacija</a>).</p>
+<p>Stvaranje privatnog klju&#269;a veli&#269;ine 2048 bita i zapis istog u formatu PKCS#8 vr&scaron;i se na na&#269;in:</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+
+<span class="kn">from</span> <span class="nn">cryptography.hazmat.primitives.asymmetric</span> <span class="kn">import</span> <span class="n">rsa</span>
+<span class="kn">from</span> <span class="nn">cryptography.hazmat.primitives</span> <span class="kn">import</span> <span class="n">serialization</span>
+<span class="kn">from</span> <span class="nn">cryptography.hazmat.primitives</span> <span class="kn">import</span> <span class="n">hashes</span>
+<span class="kn">from</span> <span class="nn">cryptography.hazmat.primitives.asymmetric</span> <span class="kn">import</span> <span class="n">padding</span>
+
+<span class="n">private_key</span> <span class="o">=</span> <span class="n">rsa</span><span class="o">.</span><span class="n">generate_private_key</span><span class="p">(</span>
+    <span class="n">public_exponent</span><span class="o">=</span><span class="mi">65537</span><span class="p">,</span>
+    <span class="n">key_size</span><span class="o">=</span><span class="mi">2048</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">private_key_pem</span> <span class="o">=</span> <span class="n">private_key</span><span class="o">.</span><span class="n">private_bytes</span><span class="p">(</span>
+    <span class="n">encoding</span><span class="o">=</span><span class="n">serialization</span><span class="o">.</span><span class="n">Encoding</span><span class="o">.</span><span class="n">PEM</span><span class="p">,</span>
+    <span class="nb">format</span><span class="o">=</span><span class="n">serialization</span><span class="o">.</span><span class="n">PrivateFormat</span><span class="o">.</span><span class="n">PKCS8</span><span class="p">,</span>
+    <span class="n">encryption_algorithm</span><span class="o">=</span><span class="n">serialization</span><span class="o">.</span><span class="n">BestAvailableEncryption</span><span class="p">(</span><span class="sa">b</span><span class="s1">'1234'</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Klju&#269; je"</span><span class="p">,</span> <span class="n">private_key_pem</span><span class="p">)</span>
+</code></pre></div>
+<p>Stvaranje pripadnog javnog klju&#269;a i pretvorba u format PKCS#1 vr&scaron;i se na na&#269;in:</p>
+<div class="highlight"><pre><span></span><code><span class="n">public_key</span> <span class="o">=</span> <span class="n">private_key</span><span class="o">.</span><span class="n">public_key</span><span class="p">()</span>
+
+<span class="n">public_key_pem</span> <span class="o">=</span> <span class="n">public_key</span><span class="o">.</span><span class="n">public_bytes</span><span class="p">(</span>
+    <span class="n">encoding</span><span class="o">=</span><span class="n">serialization</span><span class="o">.</span><span class="n">Encoding</span><span class="o">.</span><span class="n">PEM</span><span class="p">,</span>
+    <span class="nb">format</span><span class="o">=</span><span class="n">serialization</span><span class="o">.</span><span class="n">PublicFormat</span><span class="o">.</span><span class="n">PKCS1</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Klju&#269; je"</span><span class="p">,</span> <span class="n">public_key_pem</span><span class="p">)</span>
+</code></pre></div>
+<p>Klju&#269;em mo&#382;emo potpisivati i &scaron;ifrirati. Potpisivanje vr&scaron;imo tajnim klju&#269;em na na&#269;in:</p>
+<div class="highlight"><pre><span></span><code><span class="n">message</span> <span class="o">=</span> <span class="s2">"""Energi&#269;ni, za sve vrste egzistencije sposobni pojedinac </span><span class="se">\</span>
+<span class="s2">najve&#263;i je kapital i jedini temelj na&scaron;eg narodnog kapitala,"""</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span>
+<span class="n">signature</span> <span class="o">=</span> <span class="n">private_key</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span>
+    <span class="n">message</span><span class="p">,</span>
+    <span class="n">padding</span><span class="o">.</span><span class="n">PSS</span><span class="p">(</span>
+        <span class="n">mgf</span><span class="o">=</span><span class="n">padding</span><span class="o">.</span><span class="n">MGF1</span><span class="p">(</span><span class="n">hashes</span><span class="o">.</span><span class="n">SHA256</span><span class="p">()),</span>
+        <span class="n">salt_length</span><span class="o">=</span><span class="n">padding</span><span class="o">.</span><span class="n">PSS</span><span class="o">.</span><span class="n">MAX_LENGTH</span>
+    <span class="p">),</span>
+    <span class="n">hashes</span><span class="o">.</span><span class="n">SHA256</span><span class="p">()</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Potpis je"</span><span class="p">,</span> <span class="n">signature</span><span class="p">)</span>
+</code></pre></div>
+<p>Provjeru vr&scaron;imo javnim klju&#269;em na na&#269;in:</p>
+<div class="highlight"><pre><span></span><code><span class="n">verification</span> <span class="o">=</span> <span class="n">public_key</span><span class="o">.</span><span class="n">verify</span><span class="p">(</span>
+    <span class="n">signature</span><span class="p">,</span>
+    <span class="n">message</span><span class="p">,</span>
+    <span class="n">padding</span><span class="o">.</span><span class="n">PSS</span><span class="p">(</span>
+        <span class="n">mgf</span><span class="o">=</span><span class="n">padding</span><span class="o">.</span><span class="n">MGF1</span><span class="p">(</span><span class="n">hashes</span><span class="o">.</span><span class="n">SHA256</span><span class="p">()),</span>
+        <span class="n">salt_length</span><span class="o">=</span><span class="n">padding</span><span class="o">.</span><span class="n">PSS</span><span class="o">.</span><span class="n">MAX_LENGTH</span>
+    <span class="p">),</span>
+    <span class="n">hashes</span><span class="o">.</span><span class="n">SHA256</span><span class="p">()</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>&Scaron;ifriranje vr&scaron;imo javnim klju&#269;em na na&#269;in:</p>
+<div class="highlight"><pre><span></span><code><span class="n">short_message</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">"0123556789"</span>
+<span class="n">ciphertext</span> <span class="o">=</span> <span class="n">public_key</span><span class="o">.</span><span class="n">encrypt</span><span class="p">(</span>
+    <span class="n">short_message</span><span class="p">,</span>
+    <span class="n">padding</span><span class="o">.</span><span class="n">OAEP</span><span class="p">(</span>
+        <span class="n">mgf</span><span class="o">=</span><span class="n">padding</span><span class="o">.</span><span class="n">MGF1</span><span class="p">(</span><span class="n">algorithm</span><span class="o">=</span><span class="n">hashes</span><span class="o">.</span><span class="n">SHA256</span><span class="p">()),</span>
+        <span class="n">algorithm</span><span class="o">=</span><span class="n">hashes</span><span class="o">.</span><span class="n">SHA256</span><span class="p">(),</span>
+        <span class="n">label</span><span class="o">=</span><span class="kc">None</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"&Scaron;ifrirana poruka je"</span><span class="p">,</span> <span class="n">ciphertext</span><span class="p">)</span>
+</code></pre></div>
+<p>De&scaron;ifriranje vr&scaron;imo tajnim klju&#269;em na na&#269;in:</p>
+<div class="highlight"><pre><span></span><code><span class="n">plaintext</span> <span class="o">=</span> <span class="n">private_key</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span>
+    <span class="n">ciphertext</span><span class="p">,</span>
+    <span class="n">padding</span><span class="o">.</span><span class="n">OAEP</span><span class="p">(</span>
+        <span class="n">mgf</span><span class="o">=</span><span class="n">padding</span><span class="o">.</span><span class="n">MGF1</span><span class="p">(</span><span class="n">algorithm</span><span class="o">=</span><span class="n">hashes</span><span class="o">.</span><span class="n">SHA256</span><span class="p">()),</span>
+        <span class="n">algorithm</span><span class="o">=</span><span class="n">hashes</span><span class="o">.</span><span class="n">SHA256</span><span class="p">(),</span>
+        <span class="n">label</span><span class="o">=</span><span class="kc">None</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"De&scaron;ifrirana poruka je"</span><span class="p">,</span> <span class="n">plaintext</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Poruka je jednaka po&#269;etnoj?"</span> <span class="n">plaintext</span> <span class="o">==</span> <span class="n">short_message</span><span class="p">)</span>
+</code></pre></div>
+<div class="admonition admonition">
+<p class="admonition-title">Zadatak</p>
+<p>Isprobajte potpisati nekoliko poruka i usporedite dobivene potpise pa zatim provjerite koliko je duga&#269;ka najdu&#382;a poruka koju mo&#382;ete potpisati, ako ograni&#269;enje postoji.</p>
+</div>
+<div class="admonition admonition">
+<p class="admonition-title">Zadatak</p>
+<p>Isprobajte &scaron;ifrirati nekoliko poruka i uvjerite se da su rezultati razli&#269;iti, a zatim provjerite koliko je duga&#269;ka najdu&#382;a poruka koju mo&#382;ete &scaron;ifrirati, ako ograni&#269;enje postoji.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>U nastavku &#263;emo, kao i dosad, &scaron;ifrirati i de&scaron;ifrirati unutar jednog procesa bez kori&scaron;tenja me&#273;uprocesne komunikacije (primjerice, putem socketa), obzirom da razdvajanje koda na dvije strane koje me&#273;usobno komuniciraju komplicira kod i odvla&#269;i fokus sa usvajanja na&#269;ina kori&scaron;tenja kriptografskih algoritama. Me&#273;uprocesnu komunikaciju &#263;emo uvesti na kraju.</p>
+</div>
+<h2 id="razmjena-simetricnih-kljuceva-koristenjem-asimetricnog-sifriranja">Razmjena simetri&#269;nih klju&#269;eva kori&scaron;tenjem asimetri&#269;nog &scaron;ifriranja</h2>
+<p>Jedna od tipi&#269;nih primjena asimetri&#269;nog &scaron;ifriranja je razmjena klju&#269;eva za simetri&#269;no &scaron;ifriranje. Klju&#269; za simetri&#269;no &scaron;ifriranje se bira na jednoj strani:</p>
+<div class="highlight"><pre><span></span><code><span class="n">symmetric_key</span> <span class="o">=</span> <span class="s2">"MojPasFido25"</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span>
+</code></pre></div>
+<p>Kako simetri&#269;ni klju&#269; kori&scaron;ten unutar jedne sesije korisnik ne mora pamtiti, bolje ga je slu&#269;ajno generirati:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="n">symmetric_key_client</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">urandom</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+</code></pre></div>
+<p>Neka su sad spremljeni tajni klju&#269; u varijabli <code>private_key</code> i javni klju&#269; u varijabli <code>public_key</code>. Na strani koja je generirala simetri&#269;n klju&#269; on se &scaron;ifrira javnim klju&#269;em:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># public_key = ...</span>
+
+<span class="n">ciphertext</span> <span class="o">=</span> <span class="n">public_key</span><span class="o">.</span><span class="n">encrypt</span><span class="p">(</span>
+    <span class="n">symmetric_key_client</span><span class="p">,</span>
+    <span class="n">padding</span><span class="o">.</span><span class="n">OAEP</span><span class="p">(</span>
+        <span class="n">mgf</span><span class="o">=</span><span class="n">padding</span><span class="o">.</span><span class="n">MGF1</span><span class="p">(</span><span class="n">algorithm</span><span class="o">=</span><span class="n">hashes</span><span class="o">.</span><span class="n">SHA256</span><span class="p">()),</span>
+        <span class="n">algorithm</span><span class="o">=</span><span class="n">hashes</span><span class="o">.</span><span class="n">SHA256</span><span class="p">(),</span>
+        <span class="n">label</span><span class="o">=</span><span class="kc">None</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Simetri&#269;ni klju&#269; &scaron;ifriran javnim klju&#269;em je"</span><span class="p">,</span> <span class="n">ciphertext</span><span class="p">)</span>
+</code></pre></div>
+<p>Nakon primanja &scaron;ifriranog klju&#269;a na drugoj strani on se de&scaron;ifrira tajnim klju&#269;em na na&#269;in:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># private_key = ...</span>
+
+<span class="n">symmetric_key_decrypted</span> <span class="o">=</span> <span class="n">private_key</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span>
+    <span class="n">ciphertext</span><span class="p">,</span>
+    <span class="n">padding</span><span class="o">.</span><span class="n">OAEP</span><span class="p">(</span>
+        <span class="n">mgf</span><span class="o">=</span><span class="n">padding</span><span class="o">.</span><span class="n">MGF1</span><span class="p">(</span><span class="n">algorithm</span><span class="o">=</span><span class="n">hashes</span><span class="o">.</span><span class="n">SHA256</span><span class="p">()),</span>
+        <span class="n">algorithm</span><span class="o">=</span><span class="n">hashes</span><span class="o">.</span><span class="n">SHA256</span><span class="p">(),</span>
+        <span class="n">label</span><span class="o">=</span><span class="kc">None</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"De&scaron;ifrirani simetri&#269;ni klju&#269; je"</span><span class="p">,</span> <span class="n">symmetric_key_decrypted</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="autentificirano-sifriranje">Autentificirano &scaron;ifriranje</h2>
+<p>U situaciji kad je provedena razmjena klju&#269;eva mehanizmom opisanim iznad mogu&#263;e je iskoristiti bilo koji od algoritama za &scaron;ifriranje. Specijalno, ako za simetri&#269;no &scaron;ifriranje &#382;elimo koristiti AES-GCM, onda &#263;emo to izvesti na na&#269;in:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">cryptography.hazmat.primitives.ciphers.aead</span> <span class="kn">import</span> <span class="n">AESGCM</span>
+
+<span class="n">aes_key</span> <span class="o">=</span> <span class="n">AESGCM</span><span class="o">.</span><span class="n">generate_key</span><span class="p">(</span><span class="n">bit_length</span><span class="o">=</span><span class="mi">128</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"AES klju&#269; je"</span><span class="p">,</span> <span class="n">aes_key</span><span class="p">)</span>
+</code></pre></div>
+<p>Nakon razmjene klju&#269;eva i druga strana bi imala isti klju&#269;. Dodatno nam treba broj koji se koristi samo jednom (engl. number used once, kra&#263;e nonce):</p>
+<div class="highlight"><pre><span></span><code><span class="n">nonce</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">urandom</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+</code></pre></div>
+<p>Taj broj mo&#382;emo razmijeniti na isti na&#269;in kao klju&#269;eve. &Scaron;ifriranje zatim vr&scaron;imo na na&#269;in:</p>
+<div class="highlight"><pre><span></span><code><span class="n">msg</span> <span class="o">=</span> <span class="s2">"Ako ljubav nije ludost, onda nije ni ljubav."</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span>
+
+<span class="n">encrypted_msg</span> <span class="o">=</span> <span class="n">aesgcm</span><span class="o">.</span><span class="n">encrypt</span><span class="p">(</span><span class="n">nonce</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"&Scaron;ifrirana poruka je"</span><span class="p">,</span> <span class="n">encrypted_msg</span><span class="p">)</span>
+</code></pre></div>
+<p>Posljednji parametar su podaci koji se &scaron;alju bez &scaron;ifriranja za kojima nemamo potrebu pa ih postavljano na <code>None</code>. De&scaron;ifriranje se vr&scaron;i na na&#269;in:</p>
+<div class="highlight"><pre><span></span><code><span class="n">decrypted_msg</span> <span class="o">=</span> <span class="n">aesgcm</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span><span class="n">nonce</span><span class="p">,</span> <span class="n">encrypted_msg</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"De&scaron;ifrirana poruka je"</span><span class="p">,</span> <span class="n">decrypted_msg</span><span class="p">)</span>
+</code></pre></div>
+<div class="admonition admonition">
+<p class="admonition-title">Zadatak</p>
+<ul>
+<li>Zamijenite AES-GCM za AES-CCM i provjerite koristi li se na isti na&#269;in.</li>
+<li>Zamijenite AES-GCM za ChaCha20Poly1305 i prou&#269;ite u dokumentaciji koje su razlike kod generiranja simetri&#269;nog klju&#269;a.</li>
+</ul>
+</div>
+<h2 id="autentifikacija-poruka">Autentifikacija poruka</h2>
+<p>Autentifikaciju poruka je mogu&#263;e vr&scaron;iti temeljeno na hashiranju ili temeljeno na &scaron;ifriranju:</p>
+<ul>
+<li><a href="https://datatracker.ietf.org/doc/html/rfc2104">HMAC: Keyed-Hashing for Message Authentication (RFC 2104)</a></li>
+<li><a href="https://datatracker.ietf.org/doc/html/rfc4493">The AES-CMAC Algorithm (RFC 4493)</a></li>
+</ul>
+<h3 id="autentifikacija-poruka-temeljena-na-hashiranju">Autentifikacija poruka temeljena na hashiranju</h3>
+<p>HMAC (<a href="https://cryptography.io/en/latest/hazmat/primitives/mac/hmac/">dokumentacija</a>) inicijaliziramo za svaku poruku na na&#269;in:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">cryptography.hazmat.primitives</span> <span class="kn">import</span> <span class="n">hashes</span><span class="p">,</span> <span class="n">hmac</span>
+
+<span class="n">key</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">urandom</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+
+<span class="n">poruka</span> <span class="o">=</span> <span class="s2">"I kada snije&#382;i, a spu&scaron;ta se tama, u pahuljama ti&scaron;ina je sama."</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span>
+
+<span class="n">h</span> <span class="o">=</span> <span class="n">hmac</span><span class="o">.</span><span class="n">HMAC</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">hashes</span><span class="o">.</span><span class="n">MD5</span><span class="p">())</span>
+<span class="n">h</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">poruka</span><span class="p">)</span>
+
+<span class="n">hash_poruke</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">finalize</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Poruka"</span><span class="p">,</span> <span class="n">poruka</span><span class="p">,</span> <span class="s2">"ima hash"</span><span class="p">,</span> <span class="n">hash_poruke</span><span class="p">)</span>
+</code></pre></div>
+<p>Poruka i hash &scaron;alju se drugoj strani koja ima klju&#269; dobiven razmjenom klju&#269;eva opisanom iznad. Provjera poruke se vr&scaron;i na na&#269;in:</p>
+<div class="highlight"><pre><span></span><code><span class="n">h_provjera</span> <span class="o">=</span> <span class="n">hmac</span><span class="o">.</span><span class="n">HMAC</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">hashes</span><span class="o">.</span><span class="n">MD5</span><span class="p">())</span>
+<span class="n">h_provjera</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">poruka</span><span class="p">)</span>
+
+<span class="n">h_provjera</span><span class="o">.</span><span class="n">verify</span><span class="p">(</span><span class="n">hash_poruke</span><span class="p">)</span>
+</code></pre></div>
+<div class="admonition admonition">
+<p class="admonition-title">Zadatak</p>
+<ul>
+<li>Iskoristite SHA1 umjesto SHA256 i usporedite duljinu sa&#382;etka.</li>
+<li>Iskoristite MD5 umjesto SHA256 i usporedite duljinu, a zatim razmislite koliko bi vam poku&scaron;aja trebalo da pogodite to&#269;an MD5 hash neke poruke u situaciju u kojoj ne znate tajni klju&#269; pa ga ne mo&#382;ete izra&#269;unati.</li>
+</ul>
+</div>
+<h3 id="autentifikacija-poruka-temeljena-na-sifriranju">Autentifikacija poruka temeljena na &scaron;ifriranju</h3>
+<p>CMAC (<a href="https://cryptography.io/en/latest/hazmat/primitives/mac/cmac/">dokumentacija</a>) se tako&#273;er inicijalizira za svaku pojedinu poruku na na&#269;in:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">cryptography.hazmat.primitives</span> <span class="kn">import</span> <span class="n">cmac</span>
+<span class="kn">from</span> <span class="nn">cryptography.hazmat.primitives.ciphers.algorithms</span> <span class="kn">import</span> <span class="n">AES</span>
+
+<span class="n">key</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">urandom</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>
+
+<span class="n">aes</span> <span class="o">=</span> <span class="n">AES</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+<span class="n">poruka</span> <span class="o">=</span> <span class="s2">"Kad si sretan, i sunce za tobom &#382;uri."</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span>
+
+<span class="n">c</span> <span class="o">=</span> <span class="n">cmac</span><span class="o">.</span><span class="n">CMAC</span><span class="p">(</span><span class="n">aes</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">poruka</span><span class="p">)</span>
+
+<span class="n">cmac_poruke</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">finalize</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"CMAC poruke"</span><span class="p">,</span> <span class="n">poruka</span><span class="p">,</span> <span class="s2">"je"</span><span class="p">,</span> <span class="n">cmac_poruke</span><span class="p">)</span>
+</code></pre></div>
+<p>Poruka i njen CMAC &scaron;alju se drugoj strani koja ima klju&#269; dobiven razmjenom klju&#269;eva opisanom iznad. Provjera poruke se vr&scaron;i na na&#269;in:</p>
+<div class="highlight"><pre><span></span><code><span class="n">c_provjera</span> <span class="o">=</span> <span class="n">cmac</span><span class="o">.</span><span class="n">CMAC</span><span class="p">(</span><span class="n">aes</span><span class="p">)</span>
+<span class="n">c_provjera</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">poruka</span><span class="p">)</span>
+<span class="n">c_provjera</span><span class="o">.</span><span class="n">verify</span><span class="p">(</span><span class="n">cmac_poruke</span><span class="p">)</span>
+</code></pre></div>
+<div class="admonition admonition">
+<p class="admonition-title">Zadatak</p>
+<p>Iskoristite neki drugi algoritam umjesto AES-a, npr. <code>TripleDES</code>, <code>Blowfish</code> ili <code>ChaCha20</code>.</p>
+</div>
+<h2 id="dvofaktorska-autentifikacija-i-jednokratne-zaporke">Dvofaktorska autentifikacija i jednokratne zaporke</h2>
+<p>Dvofaktorska autentifikacija uz standardnu zaporku koristi i jednokratnu zaporku koja se generira prilikom prijave i &scaron;alje korisniku drugim kanalom, primjerice e-mailom ili SMS-om. Dva su pristupa stvaranju jednokratnih zaporki:</p>
+<ul>
+<li><a href="https://datatracker.ietf.org/doc/html/rfc4226.html">HOTP: An HMAC-Based One-Time Password Algorithm (RFC 4226)</a></li>
+<li><a href="https://datatracker.ietf.org/doc/html/rfc6238">TOTP: Time-Based One-Time Password Algorithm (RFC 6238)</a></li>
+</ul>
+<h3 id="jednokratne-zaporke-temeljene-na-hmac-u">Jednokratne zaporke temeljene na HMAC-u</h3>
+<p>Inicijalizacija HOTP-a (<a href="https://cryptography.io/en/latest/hazmat/primitives/twofactor/">dokumentacija</a>) vr&scaron;i se na na&#269;in:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">cryptography.hazmat.primitives.twofactor.hotp</span> <span class="kn">import</span> <span class="n">HOTP</span>
+<span class="kn">from</span> <span class="nn">cryptography.hazmat.primitives.hashes</span> <span class="kn">import</span> <span class="n">SHA1</span>
+
+<span class="n">key</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">urandom</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+
+<span class="n">hotp</span> <span class="o">=</span> <span class="n">HOTP</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="n">SHA1</span><span class="p">())</span>
+</code></pre></div>
+<p>Drugi parametar kod HOTP-a je broj znakova koje &#263;e generirane zaporke imati. Nakon inicijalizacije mogu&#263;e je generirati niz jednokratnih zaporki:</p>
+<div class="highlight"><pre><span></span><code><span class="n">hotp_value0</span> <span class="o">=</span> <span class="n">hotp</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">hotp_value1</span> <span class="o">=</span> <span class="n">hotp</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">hotp_value2</span> <span class="o">=</span> <span class="n">hotp</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="mi">75</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Jednokratne zaporke su"</span><span class="p">,</span> <span class="n">hotp_value0</span><span class="p">,</span> <span class="n">hotp_value1</span><span class="p">,</span> <span class="n">hotp_value2</span><span class="p">)</span>
+</code></pre></div>
+<p>Generirane vrijednosti se tada &scaron;alju nekim kanalom kojem jedino korisnik koji se prijavljuje ima pristup. Prima se korisnikov unos i provjerava na na&#269;in:</p>
+<div class="highlight"><pre><span></span><code><span class="n">hotp</span><span class="o">.</span><span class="n">verify</span><span class="p">(</span><span class="n">hotp_value0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">hotp</span><span class="o">.</span><span class="n">verify</span><span class="p">(</span><span class="n">hotp_value1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">hotp</span><span class="o">.</span><span class="n">verify</span><span class="p">(</span><span class="n">hotp_value2</span><span class="p">,</span> <span class="mi">75</span><span class="p">)</span>
+</code></pre></div>
+<div class="admonition admonition">
+<p class="admonition-title">Zadatak</p>
+<ul>
+<li>Provjerite prolaze li HOTP vrijednosti provjeru kad su navedeni pogre&scaron;ni redni brojevi.</li>
+<li>Provjerite mo&#382;ete li generirati i provjeravati HOTP vrijednosti u proizvoljnom poretku.</li>
+</ul>
+</div>
+<h3 id="jednokratne-zaporke-temeljene-na-vremenu">Jednokratne zaporke temeljene na vremenu</h3>
+<p>Inicijalizacija TOTP-a (<a href="https://cryptography.io/en/latest/hazmat/primitives/twofactor/">dokumentacija</a>) vr&scaron;i se na na&#269;in:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">cryptography.hazmat.primitives.twofactor.totp</span> <span class="kn">import</span> <span class="n">TOTP</span>
+<span class="kn">from</span> <span class="nn">cryptography.hazmat.primitives.hashes</span> <span class="kn">import</span> <span class="n">SHA1</span>
+
+<span class="n">key</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">urandom</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+
+<span class="n">totp</span> <span class="o">=</span> <span class="n">TOTP</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="n">SHA1</span><span class="p">(),</span> <span class="mi">30</span><span class="p">)</span>
+</code></pre></div>
+<p>Drugi parametar kod TOTP-a je, kao i kod HOTP-a, broj znakova koje &#263;e generirane zaporke imati. Posljednji navedeni parametar je vremenski korak u sekundama, odnosno interval nakon kojeg &#263;e do&#263;i idu&#263;a jednokratna zaporka.</p>
+<p>Nakon inicijalizacije mogu&#263;e je generirati niz jednokratnih zaporki navo&#273;enjem vremena:</p>
+<div class="highlight"><pre><span></span><code><span class="n">time_moment1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">totp_value1</span> <span class="o">=</span> <span class="n">totp</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">time_moment1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Zaporka stvorena u vremenskom trenutku"</span><span class="p">,</span> <span class="n">time_moment1</span><span class="p">,</span> <span class="s2">"je"</span><span class="p">,</span> <span class="n">totp_value1</span><span class="p">)</span>
+
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+
+<span class="n">time_moment2</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">totp_value2</span> <span class="o">=</span> <span class="n">totp</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">time_moment2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Zaporka stvorena u vremenskom trenutku"</span><span class="p">,</span> <span class="n">time_moment2</span><span class="p">,</span> <span class="s2">"je"</span><span class="p">,</span> <span class="n">totp_value2</span><span class="p">)</span>
+</code></pre></div>
+<p>Generirana zaporka &scaron;alje se korisniku i od njega prima, a zatim se provjera vr&scaron;i na na&#269;in:</p>
+<div class="highlight"><pre><span></span><code><span class="n">totp</span><span class="o">.</span><span class="n">verify</span><span class="p">(</span><span class="n">totp_value1</span><span class="p">,</span> <span class="n">time_moment1</span><span class="p">)</span>
+<span class="n">totp</span><span class="o">.</span><span class="n">verify</span><span class="p">(</span><span class="n">totp_value2</span><span class="p">,</span> <span class="n">time_moment2</span><span class="p">)</span>
+</code></pre></div>
+<div class="admonition admonition">
+<p class="admonition-title">Zadatak</p>
+<ul>
+<li>Provjerite prolaze li TOTP vrijednosti provjeru kad su navedeni pogre&scaron;ni vremenski intervali.</li>
+<li>Provjerite mo&#382;ete li generirati i provjeravati TOTP vrijednosti za proizvoljni vremenski trenutak koji nije sada&scaron;nji. (Uputa: iskoristite funkcije <code>time.struct_time()</code> i <code>time.mktime()</code> za stvaranje vremenskog trenutka u adekvatnom obliku.)</li>
+</ul>
+</div>
+
+
+  
+
+
+
+  <form class="md-feedback" name="feedback" hidden>
+    <fieldset>
+      <legend class="md-feedback__title">
+        Was this page helpful?
+      </legend>
+      <div class="md-feedback__inner">
+        <div class="md-feedback__list">
+          
+            <button class="md-feedback__icon md-icon" type="submit" title="This page was helpful" data-md-value="1">
+              <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24"><path d="M20 12a8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8 8 8 0 0 0 8-8m2 0a10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2a10 10 0 0 1 10 10M10 9.5c0 .8-.7 1.5-1.5 1.5S7 10.3 7 9.5 7.7 8 8.5 8s1.5.7 1.5 1.5m7 0c0 .8-.7 1.5-1.5 1.5S14 10.3 14 9.5 14.7 8 15.5 8s1.5.7 1.5 1.5m-5 7.73c-1.75 0-3.29-.73-4.19-1.81L9.23 14c.45.72 1.52 1.23 2.77 1.23s2.32-.51 2.77-1.23l1.42 1.42c-.9 1.08-2.44 1.81-4.19 1.81Z"></path></svg>
+            </button>
+          
+            <button class="md-feedback__icon md-icon" type="submit" title="This page could be improved" data-md-value="0">
+              <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24"><path d="M20 12a8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8 8 8 0 0 0 8-8m2 0a10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2a10 10 0 0 1 10 10m-6.5-4c.8 0 1.5.7 1.5 1.5s-.7 1.5-1.5 1.5-1.5-.7-1.5-1.5.7-1.5 1.5-1.5M10 9.5c0 .8-.7 1.5-1.5 1.5S7 10.3 7 9.5 7.7 8 8.5 8s1.5.7 1.5 1.5m2 4.5c1.75 0 3.29.72 4.19 1.81l-1.42 1.42C14.32 16.5 13.25 16 12 16s-2.32.5-2.77 1.23l-1.42-1.42C8.71 14.72 10.25 14 12 14Z"></path></svg>
+            </button>
+          
+        </div>
+        <div class="md-feedback__note">
+          
+            <div data-md-value="1" hidden>
+              
+              
+                
+              
+              Thanks for your feedback!
+            </div>
+          
+            <div data-md-value="0" hidden>
+              
+              
+                
+              
+              Thanks for your feedback! Help us improve this page by using our <a href="https://github.com/gaseri/website/issues/new/?title=%5BFeedback%5D+Rad%20s%20Python%20modulom%20pyca/cryptography+-+/hr/nastava/materijali/python-modul-cryptography/" target="_blank" rel="noopener">feedback form</a>.
+            </div>
+          
+        </div>
+      </div>
+    </fieldset>
+  </form>
+
+
+                
+  
+    <p>
+    
+      <small>Author: Vedran Mileti&#263;</small><br>
+    
+    
+    </p>
+  
+
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"></path></svg>
+            Vrati se na vrh
+          </button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright 2011 &ndash; 2023, <a href="https://vedran.miletic.net/">Vedran Mileti&#263;</a> <i>et <a href="people.html">alii</a></i>; contents licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC-BY-NC-ND 4.0</a>, except teaching materials in Croatian under <a href="nastava.html">/hr/nastava/materijali/</a>, teaching materials in English under <a href="teaching.html">/en/teaching/materials/</a>, and tutorials in English under <a href="gromacs.html">/en/tutorials/</a>, which are licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC-BY-SA 4.0</a>. Source code available on <a href="https://github.com/gaseri/website">GitHub gaseri/website</a>. Hosted on <a href="https://pages.github.com/">GitHub Pages</a>. Reachable as a <a href="https://community.torproject.org/onion-services/">Tor onion service</a> at <a href="http://vcwkbqby652dtqgbtbtr6ouvs6fu5abx5z45dmlug6dl55d6zcadsuqd.onion/">vcwkbqby652dtqgbtbtr6ouvs6fu5abx5z45dmlug6dl55d6zcadsuqd.onion</a>. <a href="#__consent">Change cookie settings</a>.
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://t.me/gaseri_org" target="_blank" rel="noopener" title="GASERI on Telegram" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 496 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M248 8C111.033 8 0 119.033 0 256s111.033 248 248 248 248-111.033 248-248S384.967 8 248 8Zm114.952 168.66c-3.732 39.215-19.881 134.378-28.1 178.3-3.476 18.584-10.322 24.816-16.948 25.425-14.4 1.326-25.338-9.517-39.287-18.661-21.827-14.308-34.158-23.215-55.346-37.177-24.485-16.135-8.612-25 5.342-39.5 3.652-3.793 67.107-61.51 68.335-66.746.153-.655.3-3.1-1.154-4.384s-3.59-.849-5.135-.5q-3.283.746-104.608 69.142-14.845 10.194-26.894 9.934c-8.855-.191-25.888-5.006-38.551-9.123-15.531-5.048-27.875-7.717-26.8-16.291q.84-6.7 18.45-13.7 108.446-47.248 144.628-62.3c68.872-28.647 83.183-33.623 92.511-33.789 2.052-.034 6.639.474 9.61 2.885a10.452 10.452 0 0 1 3.53 6.716 43.765 43.765 0 0 1 .417 9.769Z"></path></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://twitter.com/gaseri_org" target="_blank" rel="noopener" title="GASERI on Twitter" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 512 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"></path></svg>
+    </a>
+  
+    
+    
+      
+    
+    
+    
+    <a href="https://mstdn.science/@gaseri" target="_blank" rel="noopener me" title="GASERI on mstdn.science" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M433 179.11c0-97.2-63.71-125.7-63.71-125.7-62.52-28.7-228.56-28.4-290.48 0 0 0-63.72 28.5-63.72 125.7 0 115.7-6.6 259.4 105.63 289.1 40.51 10.7 75.32 13 103.33 11.4 50.81-2.8 79.32-18.1 79.32-18.1l-1.7-36.9s-36.31 11.4-77.12 10.1c-40.41-1.4-83-4.4-89.63-54a102.54 102.54 0 0 1-.9-13.9c85.63 20.9 158.65 9.1 178.75 6.7 56.12-6.7 105-41.3 111.23-72.9 9.8-49.8 9-121.5 9-121.5zm-75.12 125.2h-46.63v-114.2c0-49.7-64-51.6-64 6.9v62.5h-46.33V197c0-58.5-64-56.6-64-6.9v114.2H90.19c0-122.1-5.2-147.9 18.41-175 25.9-28.9 79.82-30.8 103.83 6.1l11.6 19.5 11.6-19.5c24.11-37.1 78.12-34.8 103.83-6.1 23.71 27.3 18.4 53 18.4 175z"></path></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://www.linkedin.com/company/gaseri" target="_blank" rel="noopener" title="GASERI on LinkedIn" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"></path></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://github.com/gaseri" target="_blank" rel="noopener" title="GASERI on GitHub" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 496 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://gitlab.com/gaseri" target="_blank" rel="noopener" title="GASERI on GitLab" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 512 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="m503.5 204.6-.7-1.8-69.7-181.78c-1.4-3.57-3.9-6.59-7.2-8.64-2.4-1.55-5.1-2.515-8-2.81-2.9-.295-5.7.083-8.4 1.11-2.7 1.02-5.1 2.66-7.1 4.78-1.9 2.12-3.3 4.67-4.1 7.44l-47 144H160.8l-47.1-144c-.8-2.77-2.2-5.31-4.1-7.43-2-2.12-4.4-3.75-7.1-4.77a18.1 18.1 0 0 0-8.38-1.113 18.4 18.4 0 0 0-8.04 2.793 18.09 18.09 0 0 0-7.16 8.64L9.267 202.8l-.724 1.8a129.57 129.57 0 0 0-3.52 82c7.747 26.9 24.047 50.7 46.447 67.6l.27.2.59.4 105.97 79.5 52.6 39.7 32 24.2c3.7 1.9 8.3 4.3 13 4.3 4.7 0 9.3-2.4 13-4.3l32-24.2 52.6-39.7 106.7-79.9.3-.3c22.4-16.9 38.7-40.6 45.6-67.5 8.6-27 7.4-55.8-2.6-82z"></path></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://bitbucket.org/gaseri" target="_blank" rel="noopener" title="GASERI on Bitbucket" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 512 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M22.2 32A16 16 0 0 0 6 47.8a26.35 26.35 0 0 0 .2 2.8l67.9 412.1a21.77 21.77 0 0 0 21.3 18.2h325.7a16 16 0 0 0 16-13.4L505 50.7a16 16 0 0 0-13.2-18.3 24.58 24.58 0 0 0-2.8-.2L22.2 32zm285.9 297.8h-104l-28.1-147h157.3l-25.2 147z"></path></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-consent" data-md-component="consent" id="__consent" hidden>
+        <div class="md-consent__overlay"></div>
+        <aside class="md-consent__inner">
+          <form class="md-consent__form md-grid md-typeset" name="consent">
+            
+
+  
+    
+  
+
+
+  
+    
+  
+
+
+
+  
+
+
+<h4>Cookie consent</h4>
+<p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our website and whether users find what they're searching for. With your consent, you're helping us to make our website better.</p>
+<input class="md-toggle" type="checkbox" id="__settings">
+<div class="md-consent__settings">
+  <ul class="task-list">
+    
+      
+      
+        
+        
+      
+      <li class="task-list-item">
+        <label class="task-list-control">
+          <input type="checkbox" name="analytics" checked>
+          <span class="task-list-indicator"></span>
+          Google Analytics
+        </label>
+      </li>
+    
+      
+      
+        
+        
+      
+      <li class="task-list-item">
+        <label class="task-list-control">
+          <input type="checkbox" name="github" checked>
+          <span class="task-list-indicator"></span>
+          GitHub
+        </label>
+      </li>
+    
+  </ul>
+</div>
+<div class="md-consent__controls">
+  
+    
+      <button class="md-button md-button--primary">Prihvati</button>
+    
+    
+    
+  
+    
+    
+    
+      <label class="md-button" for="__settings">Upravljaj postavkama</label>
+    
+  
+</div>
+          </form>
+        </aside>
+      </div>
+      <script>var consent=__md_get("__consent");if(consent)for(var input of document.forms.consent.elements)input.name&&(input.checked=consent[input.name]||!1);else"file:"!==location.protocol&&setTimeout(function(){document.querySelector("[data-md-component=consent]").hidden=!1},250);var action,form=document.forms.consent;for(action of["submit","reset"])form.addEventListener(action,function(e){if(e.preventDefault(),"reset"===e.type)for(var n of document.forms.consent.elements)n.name&&(n.checked=!1);__md_set("__consent",Object.fromEntries(Array.from(new FormData(form).keys()).map(function(e){return[e,!0]}))),location.hash="",location.reload()})</script>
+    
+    <script id="__config" type="application/json">{"base": "../../../..", "features": ["announce.dismiss", "content.code.copy", "content.action.edit", "content.action.view", "header.autohide", "navigation.instant", "navigation.indexes", "navigation.sections", "navigation.tabs", "navigation.top", "navigation.tracking", "toc.follow"], "search": "../../../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Kopirano u me\u0111uspremnik", "clipboard.copy": "Kopiraj u me\u0111uspremnik", "search.result.more.one": "1 rezultat na ovoj stranici", "search.result.more.other": "# rezultat(a) na ovoj stranici", "search.result.none": "Ni\u0161ta nije prona\u0111eno", "search.result.one": "1 rezultat pretra\u017eivanja", "search.result.other": "# rezultat(a) pretra\u017eivanja", "search.result.placeholder": "Unesite pojam pretra\u017eivanja", "search.result.term.missing": "Nedostaje", "select.version": "Odabir verzije"}}</script>
+    
+    
+      <script src="js/javascripts-bundle.a51614de.min.js"></script>
+      
+        
+          <script src="js/javascripts-mathjax.js"></script>
+        
+      
+        
+          <script src="js/v3-polyfill.min.js"></script>
+        
+      
+        
+          <script src="js/es5-tex-mml-chtml.js"></script>
+        
+      
+    
+  </body>
+</html>
