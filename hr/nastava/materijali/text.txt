@@ -1,98 +1,46 @@
-import cryptography
-import socket 
-from cryptography.hazmat.primitives.asymmetric import rsa
-from cryptography.hazmat.primitives import serialization
-from cryptography.hazmat.primitives import hashes
-from cryptography.hazmat.primitives.asymmetric import padding
-
-
-private_key = rsa.generate_private_key(
-    public_exponent=65537,
-    key_size=2048,
-)
-private_key_pem = private_key.private_bytes(
-    encoding=serialization.Encoding.PEM,
-    format=serialization.PrivateFormat.PKCS8,
-    encryption_algorithm=serialization.BestAvailableEncryption(b'1234')
-)
-
-public_key = private_key.public_key()
-public_key_pem = public_key.public_bytes(
-    encoding=serialization.Encoding.PEM,
-    format=serialization.PublicFormat.PKCS1
-)
-
-
+import socket
+from cryptography.fernet import Fernet
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-sock.connect(('localhost',5000))
+sock.connect(('localhost', 6200))
 
-public_server_key_pem = sock.recv(1024)
-public_server_key = serialization.load_pem_public_key(public_server_key_pem)
+
+key = Fernet.generate_key()
+f = Fernet(key)
+
+sock.send(key)
 
 while(1):
-    pozdrav = input("Unesi poruku: ")
-    podaci = pozdrav.encode()
-    cipher = public_server_key.encrypt(
-    podaci,
-    padding.OAEP(
-        mgf=padding.MGF1(algorithm=hashes.SHA256()),
-        algorithm=hashes.SHA256(),
-        label=None
-        )
-
-    )
-    sock.send(cipher)
-    print(podaci)
-    if pozdrav=='q':
-        break
-sock.close()   
-
-import cryptography
-import socket 
-from cryptography.hazmat.primitives.asymmetric import rsa
-from cryptography.hazmat.primitives import serialization
-from cryptography.hazmat.primitives import hashes
-from cryptography.hazmat.primitives.asymmetric import padding
-
-private_key = rsa.generate_private_key(
-    public_exponent=65537,
-    key_size=2048,
-)
-
-private_key_pem = private_key.private_bytes(
-    encoding=serialization.Encoding.PEM,
-    format=serialization.PrivateFormat.PKCS8,
-    encryption_algorithm=serialization.BestAvailableEncryption(b'1234')
-)
-
-public_key = private_key.public_key()
-
-public_key_pem = public_key.public_bytes(
-    encoding=serialization.Encoding.PEM,
-    format=serialization.PublicFormat.PKCS1
-)
+    pozdrav = input("!Unesi poruku: ")
+    podaci = f.encrypt(pozdrav.encode())
+    sock.send(podaci)
+    primljeni_podaci = sock.recv(1024)
+    primljeni_pozdrav = primljeni_podaci.decode()
+    print(primljeni_pozdrav)
+sock.close()
 
 
+import socket
+from cryptography.fernet import Fernet
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-sock.bind(('localhost',5000))
+sock.bind(('localhost', 6200))
 sock.listen(1)
-clisock,addr = sock.accept()
-clisock.send(public_key_pem)
+clisock, addr = sock.accept()
 
-while(1):
+
+key = clisock.recv(1024)
+
+f = Fernet(key)
+
+
+while True:
     podaci = clisock.recv(1024)
     if not podaci:
         break
-    pozdrav = private_key.decrypt(
-        podaci,
-        padding.OAEP(
-            mgf=padding.MGF1(algorithm=hashes.SHA256()),
-            algorithm=hashes.SHA256(),
-            label=None
-        )
-    )
-    print(pozdrav.decode())
+    pozdrav = f.decrypt(podaci.decode())
+    print(pozdrav)
+    poslani_podaci = pozdrav.decode()
+    clisock.send(poslani_podaci.encode())
 clisock.close()
 sock.close()
