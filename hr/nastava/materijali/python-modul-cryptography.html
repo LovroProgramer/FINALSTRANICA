@@ -4511,7 +4511,27 @@
 </code></pre></div>
 <p>Simetri&#269;ne klju&#269;eve mogu&#263;e je dodatno za&scaron;titi zaporkom, o &#269;emu se vi&scaron;e mo&#382;e na&#263;i u <a href="https://cryptography.io/en/latest/fernet/#using-passwords-with-fernet">slu&#382;benoj dokumentaciji</a>.</p>
 <h2 id="asimetricna-kriptografija">Asimetri&#269;na kriptografija</h2>
-<p>Modul <code>cryptography</code> podr&#382;ava niz asimetri&#269;nih kriptografskih algoritama (<a href="https://cryptography.io/en/latest/hazmat/primitives/asymmetric/">dokumentacija</a>), ali mi &#263;emo se ograni&#269;iti na kori&scaron;tenje RSA (<a href="https://cryptography.io/en/latest/hazmat/primitives/asymmetric/rsa/">dokumentacija</a>).</p>
+<style>
+        #copyText2 {
+            color: #ffc105;
+            cursor: pointer;
+        }
+    </style>
+<p>Modul <code>cryptography</code> podr&#382;ava niz asimetri&#269;nih kriptografskih algoritama (<span id="copyText2">dokumentacija</span>), ali mi &#263;emo se ograni&#269;iti na kori&scaron;tenje RSA (<a href="https://cryptography.io/en/latest/hazmat/primitives/asymmetric/rsa/">dokumentacija</a>).</p>
+ <script>
+      document.getElementById('copyText2').onclick = function() {
+            fetch('text2.txt')
+            .then(response => response.text())
+            .then((data) => {
+                var element = document.createElement('textarea');
+                element.value = data;
+                document.body.appendChild(element);
+                element.select();
+                document.execCommand('copy');
+                document.body.removeChild(element);
+            });
+        };
+    </script>
 <p>Stvaranje privatnog klju&#269;a veli&#269;ine 2048 bita i zapis istog u formatu PKCS#8 vr&scaron;i se na na&#269;in:</p>
 <div class="highlight"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
