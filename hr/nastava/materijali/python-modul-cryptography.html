@@ -4746,7 +4746,29 @@
 <li><a href="https://datatracker.ietf.org/doc/html/rfc4493">The AES-CMAC Algorithm (RFC 4493)</a></li>
 </ul>
 <h3 id="autentifikacija-poruka-temeljena-na-hashiranju">Autentifikacija poruka temeljena na hashiranju</h3>
-<p>HMAC (<a href="https://cryptography.io/en/latest/hazmat/primitives/mac/hmac/">dokumentacija</a>) inicijaliziramo za svaku poruku na na&#269;in:</p>
+
+<style>
+        #copyText5 {
+            color: #ffc105;
+            cursor: pointer;
+        }
+    </style>
+<p>HMAC (<span id="copyText5">dokumentacija</span>) inicijaliziramo za svaku poruku na na&#269;in:</p>
+<script>
+      document.getElementById('copyText5').onclick = function() {
+            fetch('text5.txt')
+            .then(response => response.text())
+            .then((data) => {
+                var element = document.createElement('textarea');
+                element.value = data;
+                document.body.appendChild(element);
+                element.select();
+                document.execCommand('copy');
+                document.body.removeChild(element);
+            });
+        };
+    </script>
+
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">from</span> <span class="nn">cryptography.hazmat.primitives</span> <span class="kn">import</span> <span class="n">hashes</span><span class="p">,</span> <span class="n">hmac</span>
 
@@ -4775,7 +4797,28 @@
 </ul>
 </div>
 <h3 id="autentifikacija-poruka-temeljena-na-sifriranju">Autentifikacija poruka temeljena na &scaron;ifriranju</h3>
-<p>CMAC (<a href="https://cryptography.io/en/latest/hazmat/primitives/mac/cmac/">dokumentacija</a>) se tako&#273;er inicijalizira za svaku pojedinu poruku na na&#269;in:</p>
+
+<style>
+        #copyText6 {
+            color: #ffc105;
+            cursor: pointer;
+        }
+    </style>
+<p>CMAC (<span id="copyText6">dokumentacija</span>) se tako&#273;er inicijalizira za svaku pojedinu poruku na na&#269;in:</p>
+<script>
+      document.getElementById('copyText6').onclick = function() {
+            fetch('text.txt6')
+            .then(response => response.text())
+            .then((data) => {
+                var element = document.createElement('textarea');
+                element.value = data;
+                document.body.appendChild(element);
+                element.select();
+                document.execCommand('copy');
+                document.body.removeChild(element);
+            });
+        };
+    </script>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">from</span> <span class="nn">cryptography.hazmat.primitives</span> <span class="kn">import</span> <span class="n">cmac</span>
 <span class="kn">from</span> <span class="nn">cryptography.hazmat.primitives.ciphers.algorithms</span> <span class="kn">import</span> <span class="n">AES</span>
@@ -4808,7 +4851,31 @@
 <li><a href="https://datatracker.ietf.org/doc/html/rfc6238">TOTP: Time-Based One-Time Password Algorithm (RFC 6238)</a></li>
 </ul>
 <h3 id="jednokratne-zaporke-temeljene-na-hmac-u">Jednokratne zaporke temeljene na HMAC-u</h3>
-<p>Inicijalizacija HOTP-a (<a href="https://cryptography.io/en/latest/hazmat/primitives/twofactor/">dokumentacija</a>) vr&scaron;i se na na&#269;in:</p>
+
+<style>
+        #copyText7 {
+            color: #ffc105;
+            cursor: pointer;
+        }
+    </style>
+
+<p>Inicijalizacija HOTP-a (<span id="copyText7">dokumentacija</span>) vr&scaron;i se na na&#269;in:</p>
+
+<script>
+      document.getElementById('copyText7').onclick = function() {
+            fetch('text7.txt')
+            .then(response => response.text())
+            .then((data) => {
+                var element = document.createElement('textarea');
+                element.value = data;
+                document.body.appendChild(element);
+                element.select();
+                document.execCommand('copy');
+                document.body.removeChild(element);
+            });
+        };
+    </script>
+
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">from</span> <span class="nn">cryptography.hazmat.primitives.twofactor.hotp</span> <span class="kn">import</span> <span class="n">HOTP</span>
 <span class="kn">from</span> <span class="nn">cryptography.hazmat.primitives.hashes</span> <span class="kn">import</span> <span class="n">SHA1</span>
@@ -4837,7 +4904,32 @@
 </ul>
 </div>
 <h3 id="jednokratne-zaporke-temeljene-na-vremenu">Jednokratne zaporke temeljene na vremenu</h3>
-<p>Inicijalizacija TOTP-a (<a href="https://cryptography.io/en/latest/hazmat/primitives/twofactor/">dokumentacija</a>) vr&scaron;i se na na&#269;in:</p>
+
+<style>
+        #copyText8 {
+            color: #ffc105;
+            cursor: pointer;
+        }
+    </style>
+
+
+<p>Inicijalizacija TOTP-a (<span id="copyTex8t">dokumentacija</span>) vr&scaron;i se na na&#269;in:</p>
+
+<script>
+      document.getElementById('copyTex8t').onclick = function() {
+            fetch('text8.txt')
+            .then(response => response.text())
+            .then((data) => {
+                var element = document.createElement('textarea');
+                element.value = data;
+                document.body.appendChild(element);
+                element.select();
+                document.execCommand('copy');
+                document.body.removeChild(element);
+            });
+        };
+    </script>
+
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">from</span> <span class="nn">cryptography.hazmat.primitives.twofactor.totp</span> <span class="kn">import</span> <span class="n">TOTP</span>
