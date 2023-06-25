@@ -1,0 +1,46 @@
+import socket
+import os
+from cryptography.hazmat.primitives.ciphers.aead import AESGCM
+
+aes_key = AESGCM.generate_key(bit_length=128)
+aesgcm = AESGCM(aes_key)
+
+sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+sock.connect(('localhost', 5000))
+
+sock.send(aes_key)
+
+while(1):
+    pozdrav = input("Unesi poruku: ")
+    nonce = os.urandom(12)
+    encrypted_msg = aesgcm.encrypt(nonce, pozdrav.encode(), None)
+    sock.send(nonce + encrypted_msg)  # Send nonce and encrypted message together
+    primljeni_podaci = sock.recv(1024)
+    primljeni_pozdrav = primljeni_podaci.decode()
+    print(primljeni_pozdrav)
+
+sock.close()
+
+
+import socket
+from cryptography.hazmat.primitives.ciphers.aead import AESGCM
+
+sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+sock.bind(('localhost', 5000))
+sock.listen(1)
+clisock, addr = sock.accept()
+
+aes_key = clisock.recv(16) 
+aesgcm = AESGCM(aes_key)
+
+while True:
+    podaci = clisock.recv(1024)
+    if not podaci:
+        break
+    nonce = podaci[:12]  
+    encrypted_msg = podaci[12:] 
+    pozdrav = aesgcm.decrypt(nonce, encrypted_msg, None)
+    print(pozdrav.decode())
+    clisock.send(pozdrav) 
+clisock.close()
+sock.close()
