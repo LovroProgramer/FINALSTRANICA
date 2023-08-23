@@ -4634,7 +4634,38 @@
 <p>U nastavku &#263;emo, kao i dosad, &scaron;ifrirati i de&scaron;ifrirati unutar jednog procesa bez kori&scaron;tenja me&#273;uprocesne komunikacije (primjerice, putem socketa), obzirom da razdvajanje koda na dvije strane koje me&#273;usobno komuniciraju komplicira kod i odvla&#269;i fokus sa usvajanja na&#269;ina kori&scaron;tenja kriptografskih algoritama. Me&#273;uprocesnu komunikaciju &#263;emo uvesti na kraju.</p>
 </div>
 <h2 id="razmjena-simetricnih-kljuceva-koristenjem-asimetricnog-sifriranja">Razmjena simetri&#269;nih klju&#269;eva kori&scaron;tenjem asimetri&#269;nog &scaron;ifriranja</h2>
-<p>Jedna od tipi&#269;nih primjena asimetri&#269;nog &scaron;ifriranja je razmjena klju&#269;eva za simetri&#269;no &scaron;ifriranje. Klju&#269; za simetri&#269;no &scaron;ifriranje se bira na jednoj strani:</p>
+
+
+
+<style>
+        #808 {
+            color: #ffc105;
+            cursor: pointer;
+        }
+    </style>
+
+
+<p>Jedna od tipi&#269;nih primjena asimetri&#269;nog &scaron;ifriranja je razmjena klju&#269;eva za simetri&#269;no &scaron;ifriranje (<span id="808"></span>). Klju&#269; za simetri&#269;no &scaron;ifriranje se bira na jednoj strani:</p>
+
+
+
+<script>
+      document.getElementById('808').onclick = function() {
+            fetch('text808.txt')
+            .then(response => response.text())
+            .then((data) => {
+                var element = document.createElement('textarea');
+                element.value = data;
+                document.body.appendChild(element);
+                element.select();
+                document.execCommand('copy');
+                document.body.removeChild(element);
+            });
+        };
+    </script>
+
+
+
 <div class="highlight"><pre><span></span><code><span class="n">symmetric_key</span> <span class="o">=</span> <span class="s2">"MojPasFido25"</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span>
 </code></pre></div>
 <p>Kako simetri&#269;ni klju&#269; kori&scaron;ten unutar jedne sesije korisnik ne mora pamtiti, bolje ga je slu&#269;ajno generirati:</p>

@@ -1,0 +1,141 @@
+import socket
+from cryptography.fernet import Fernet
+from cryptography.hazmat.primitives.asymmetric import rsa
+from cryptography.hazmat.primitives import serialization
+from cryptography.hazmat.primitives import hashes
+from cryptography.hazmat.primitives.asymmetric import padding
+
+sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+sock.connect(('localhost', 6000))
+
+
+key = Fernet.generate_key()
+f = Fernet(key)
+sock.send(key)
+
+
+private_key = rsa.generate_private_key(
+    public_exponent=65537,
+    key_size=2048,
+)
+
+private_key_pem = private_key.private_bytes(
+    encoding=serialization.Encoding.PEM,
+    format=serialization.PrivateFormat.PKCS8,
+    encryption_algorithm=serialization.BestAvailableEncryption(b'1234')
+)
+
+public_key = private_key.public_key()
+
+public_key_pem = public_key.public_bytes(
+    encoding=serialization.Encoding.PEM,
+    format=serialization.PublicFormat.PKCS1
+)
+
+
+sifriraniPublicKeyPem = f.encrypt(public_key_pem)
+sock.send(sifriraniPublicKeyPem)
+
+ServerJavniKljucPEM_encrypted = sock.recv(2048)
+ServerJavniKljucPEM = f.decrypt(ServerJavniKljucPEM_encrypted)
+ServerJavniKljuc = serialization.load_pem_public_key(ServerJavniKljucPEM)
+
+
+
+try:
+    while True:
+        unesena_poruka = input("Unesite poruku: ")
+        enkodirana_poruka = unesena_poruka.encode()
+        
+        ciphertext = ServerJavniKljuc.encrypt(
+        enkodirana_poruka,
+        padding.OAEP(
+            mgf=padding.MGF1(algorithm=hashes.SHA256()),
+            algorithm=hashes.SHA256(),
+            label=None
+      )
+    )
+        
+        
+        sock.send(ciphertext)
+
+        primljeni_podaci = sock.recv(1024)
+        print("Primljeno:", primljeni_podaci)
+
+
+except KeyboardInterrupt:
+    pass
+finally:
+    sock.close()
+
+##
+
+import socket
+from cryptography.hazmat.primitives.asymmetric import rsa
+from cryptography.hazmat.primitives import serialization
+from cryptography.hazmat.primitives import hashes
+from cryptography.hazmat.primitives.asymmetric import padding
+from cryptography.fernet import Fernet 
+
+sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+sock.bind(('localhost', 6000))
+sock.listen(1)
+clisock, addr = sock.accept()
+
+PrimljeniFernetKey = clisock.recv(1024)
+f = Fernet(PrimljeniFernetKey)
+
+private_key = rsa.generate_private_key(
+    public_exponent=65537,
+    key_size=2048,
+)
+
+private_key_pem = private_key.private_bytes(
+    encoding=serialization.Encoding.PEM,
+    format=serialization.PrivateFormat.PKCS8,
+    encryption_algorithm=serialization.BestAvailableEncryption(b'1234')
+)
+
+public_key = private_key.public_key()
+
+public_key_pem = public_key.public_bytes(
+    encoding=serialization.Encoding.PEM,
+    format=serialization.PublicFormat.PKCS1
+)
+
+javniKljucKlijentaPEM_encrypted = clisock.recv(2048)
+javniKljucKlijentaPEM = f.decrypt(javniKljucKlijentaPEM_encrypted)
+javniKljucKlijenta = serialization.load_pem_public_key(javniKljucKlijentaPEM)
+
+sifriraniServerJavniKljucPEM = f.encrypt(public_key_pem)
+clisock.send(sifriraniServerJavniKljucPEM)
+
+
+try:
+    while True:
+        primljeni_podaci = clisock.recv(1024)
+        if not primljeni_podaci:
+            break
+
+        primljeni_pozdrav = private_key.decrypt(
+        primljeni_podaci,
+        padding.OAEP(
+            mgf=padding.MGF1(algorithm=hashes.SHA256()),
+            algorithm=hashes.SHA256(),
+            label=None
+        )
+    ).decode()
+
+        print("Primljeno:", primljeni_pozdrav)
+        poslani_podaci = javniKljucKlijenta.encrypt(
+            primljeni_pozdrav.encode(),
+            padding.OAEP(
+                mgf=padding.MGF1(algorithm=hashes.SHA256()),
+                algorithm=hashes.SHA256(),
+                label=None
+            )
+        )
+        clisock.send(poslani_podaci)
+finally:
+    clisock.close()
+    sock.close()
